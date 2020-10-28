@@ -1,0 +1,14 @@
+.wrapper-form {
+  & .bottom-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    & .register{
+      border: none;
+      outline: none;
+      background: none;
+      &:hover{
+        color: blue;
+      }
+    }
+  }
+}
