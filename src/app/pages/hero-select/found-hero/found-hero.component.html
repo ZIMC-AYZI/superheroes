@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-wrapper">
+      <div class="card-img">
+        <img [src]="foundHero.image.url" alt="">
+      </div>
+      <h5 class="card-title">{{ foundHero.name | titlecase}}</h5>
+    </div>
+    <div class="card-wrapper">
+      <p class="card-text">PowerStats</p>
+      <div class="power-stats">
+        <p *ngFor="let stat of foundHero.powerstats | keyvalue">
+          {{ stat.key | titlecase }} : {{ stat.value }}
+        </p>
+      </div>
+    </div>
+      <div class="card-wrapper">
+        <button class="btn btn-warning" (click)="chooseThisHero()">{{ buttonState }}</button>
+      </div>
+    </div>
+</div>
