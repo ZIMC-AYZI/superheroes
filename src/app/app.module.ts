@@ -1,34 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginPageComponent } from './core/components/login-page/login-page.component';
-import { RegistrationComponent } from './core/components/login-page/registration/registration.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
-import {ReactiveFormsModule} from "@angular/forms";
-import { ModalComponent } from './core/components/modal/modal.component';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonModule} from "@angular/material/button";
+import {HeaderModule} from "./core/components/header/header.module";
+import {HttpClientModule} from "@angular/common/http";
+import {HeroSelectModule} from "./pages/hero-select/hero-select.module";
+import {LoginPageModule} from "./pages/login-registration-page/login-page.module";
+import {AuthService} from "./core/services/auth.service";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPageComponent,
-    RegistrationComponent,
-    ModalComponent
   ],
   imports: [
+    HeaderModule,
+    HeroSelectModule,
+    LoginPageModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatButtonModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
