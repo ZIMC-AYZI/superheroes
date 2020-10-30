@@ -3,8 +3,8 @@ import {DataServicesService} from "../../core/services/data-services.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../core/services/auth.service";
 import {AbstractFormComponent} from "../../shared/classes/abstract-form-component";
-import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../login-registration-page/utils/start-registration-form-validators.const";
 import {Hero} from "../../models/hero-card-model";
+import {SEARCH_HEROES_VALIDATORS_CONST} from "./utils/search-heroes-validators.const";
 
 @Component({
   selector: 'app-hero-select',
@@ -32,7 +32,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     this.form = this.fb.group({
       userEnterValue: ['', [
         Validators.required,
-        Validators.pattern(START_REGISTRATION_FORM_VALIDATORS_CONST.findHeroPattern)
+        Validators.pattern(SEARCH_HEROES_VALIDATORS_CONST.findHeroPattern)
       ]]
     });
     this.authService.checkSession()

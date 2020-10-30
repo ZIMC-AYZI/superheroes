@@ -1,5 +1,4 @@
 import {
-  findHeroRegExp,
   userEmailRegExp,
   userNickNameRegExp,
   userPasswordRegExp
@@ -9,6 +8,5 @@ export const START_REGISTRATION_FORM_VALIDATORS_CONST = {
   userNickNamePattern: userNickNameRegExp,
   userNickNameMinLength: 8,
   userPasswordPattern: userPasswordRegExp,
-  userEmailPattern: userEmailRegExp,
-  findHeroPattern: findHeroRegExp
+  userEmailPattern: userEmailRegExp
 };
