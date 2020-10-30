@@ -1,0 +1,12 @@
+.abc-wrapper{
+  position: absolute;
+  left: -22%;
+  width: 17%;
+  & .abc-list{
+    display: flex;
+    flex-wrap: wrap;
+    & .abc-item{
+      margin: 2px;
+    }
+  }
+}

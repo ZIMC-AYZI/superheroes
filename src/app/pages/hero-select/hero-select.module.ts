@@ -5,6 +5,7 @@ import {FoundHeroComponent} from "./found-hero/found-hero.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {RouterModule, Routes} from "@angular/router";
+import { AlphabeticalComponent } from './alphabetical/alphabetical.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HeroSelectComponent,
-    FoundHeroComponent
+    FoundHeroComponent,
+    AlphabeticalComponent
   ],
   imports: [
     CommonModule,

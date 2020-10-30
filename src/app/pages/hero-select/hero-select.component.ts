@@ -16,6 +16,8 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   public resultState = false;
   public foundHeroes: Hero[] = [];
   public recentSearches: string[] = [];
+  public stateAlphabetical = false;
+  public myLetter: string = 'A';
   constructor(
     private data: DataServicesService,
     private authService: AuthService,
@@ -53,6 +55,26 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
 
   public recentSearch(recent): void {
     this.data.getData(recent)
+      .subscribe((response: any) => {
+        this.foundHeroes = response.results;
+        this.resultState = true;
+        this.result = response.results.length;
+      })
+  }
+
+  public showAlphabetical() {
+    this.stateAlphabetical = !this.stateAlphabetical
+  }
+
+  toggleLetter(letter: string) {
+    this.myLetter = letter
+  }
+
+  searchByValueBtn(menuState: boolean) {
+    this.stateAlphabetical = menuState
+    this.recentSearches.push(this.myLetter);
+    localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
+    this.data.getData(this.myLetter)
       .subscribe((response: any) => {
         this.foundHeroes = response.results;
         this.resultState = true;

@@ -1,9 +1,17 @@
 <div class="hero-select-wrapper">
   <div class="container">
     <div class="md-form mt-0 search-custom-wrapper">
-<!--      btn-for-custom-menu-->
-      <button class="btn btn-danger custom">A</button>
-      <!--      btn-for-custom-menu-->
+<!--Custom menu-->
+      <button
+        class="btn btn-danger custom"
+        (click)="showAlphabetical()"
+      >{{ myLetter | uppercase}}</button>
+      <app-alphabetical
+        *ngIf="stateAlphabetical"
+        (myLetter)="toggleLetter($event)"
+        (searchBtn)="searchByValueBtn($event)"
+      ></app-alphabetical>
+<!--Custom menu-->
       <form [formGroup]="form">
         <div class="form-group">
       <input class="form-control"
