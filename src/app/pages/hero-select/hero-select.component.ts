@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {DataServicesService} from "../../core/services/data-services.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../core/services/auth.service";
 import {AbstractFormComponent} from "../../shared/classes/abstract-form-component";
 import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../login-registration-page/utils/start-registration-form-validators.const";
+import {Hero} from "../../models/hero-card-model";
 
 @Component({
   selector: 'app-hero-select',
@@ -11,11 +12,10 @@ import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../login-registration-pa
   styleUrls: ['./hero-select.component.scss']
 })
 export class HeroSelectComponent extends AbstractFormComponent implements OnInit {
-  result: string;
-  resultState: boolean = false;
-  foundHeroes: any[] = [];
-  recentSearches: any[] = [];
-  form: FormGroup;
+  public result: string;
+  public resultState = false;
+  public foundHeroes: Hero[] = [];
+  public recentSearches: string[] = [];
   constructor(
     private data: DataServicesService,
     private authService: AuthService,
@@ -38,7 +38,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     this.authService.checkSession()
   }
 
-  findHeroes() {
+  public findHeroes(): void {
     if (this.form.valid){
       this.recentSearches.push(this.form.value.userEnterValue);
       localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
@@ -51,7 +51,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     }
   }
 
-  recentSearch(recent) {
+  public recentSearch(recent): void {
     this.data.getData(recent)
       .subscribe((response: any) => {
         this.foundHeroes = response.results;

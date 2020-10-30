@@ -5,36 +5,36 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class AuthService {
-  isAuth : boolean;
-  myToken: any;
-  showModal: boolean = false;
-  expireDate: number = 6000;
+  private isAuth : boolean;
+  private myToken: number;
+  private showModal = false;
+  private expireDate = 6000;
   constructor(private router: Router) { }
 
-  signIn() {
+  public signIn(): void {
     this.myToken = Date.now();
     this.setToken();
     this.isAuth = true;
   }
 
-  logout() {
+  public logout(): void {
     this.clearToken();
     this.isAuth = false;
   }
 
-  tokenState() {
+  public tokenState(): boolean {
     return this.showModal;
   }
 
-  private setToken(){
-    sessionStorage.setItem('myToken', this.myToken)
+  private setToken(): void{
+    sessionStorage.setItem('myToken', JSON.stringify(this.myToken));
   }
 
-  private clearToken() {
+  private clearToken(): void {
     sessionStorage.clear()
   }
 
-  checkSession() {
+  public checkSession(): void {
     if (sessionStorage.getItem('myToken')){
       const loginTime = JSON.parse(sessionStorage.getItem('myToken'));
       const currentDate = Date.now();

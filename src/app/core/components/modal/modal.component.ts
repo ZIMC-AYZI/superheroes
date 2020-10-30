@@ -12,7 +12,7 @@ export class ModalComponent {
 
   constructor() {}
 
-  closeModal(): void {
+  public closeModal(): void {
     this.opened = false;
     this.openedChange.emit(false);
   }

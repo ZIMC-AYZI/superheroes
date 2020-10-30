@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registration-form-validators.const";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
+import {User} from "../../../models/user-models";
 
 @Component({
   selector: 'app-registration',
@@ -9,7 +10,7 @@ import {AbstractFormComponent} from "../../../shared/classes/abstract-form-compo
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent extends AbstractFormComponent implements OnInit {
-  userData: object[] = [];
+  private userData: User[] = [];
   constructor( private fb: FormBuilder) {
     super();
   }
@@ -33,9 +34,9 @@ export class RegistrationComponent extends AbstractFormComponent implements OnIn
     })
   }
 
-  registerUser({email, password, username}) {
+  public registerUser({email, password, username}): void {
     if (this.form.valid) {
-    const user: object = {
+    const user = {
       email,
       password,
       username

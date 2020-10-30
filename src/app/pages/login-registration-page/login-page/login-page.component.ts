@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
+import {User} from "../../../models/user-models";
 
 @Component({
   selector: 'app-login-page',
@@ -10,8 +11,8 @@ import {AbstractFormComponent} from "../../../shared/classes/abstract-form-compo
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent extends AbstractFormComponent implements OnInit {
-  userData: any[] = [];
-  showModal: boolean = false;
+  private userData: User[] = [];
+  public showModal = false;
 
   constructor(
     private router: Router,
@@ -39,7 +40,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
     console.log(this.showModal)
   }
 
-  login({email, password}) {
+  public login({email, password}): void {
     if (this.form.valid) {
       this.userData.forEach(el => {
         if (email === el.email && password === el.password){
@@ -53,7 +54,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
 
   }
 
-  goToRegister() {
+  public goToRegister(): void {
     this.router.navigate(['register'])
   }
 }
