@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {alphaLetters} from "../../../shared/utils/constants/alhfa-betical-letters.const";
 
 @Component({
   selector: 'app-alphabetical',
@@ -8,12 +9,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class AlphabeticalComponent {
   @Output() myLetter: EventEmitter<string> = new EventEmitter<string>();
   @Output() searchBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
-  public menuLetters: string[] = [
-    'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
-  ];
+  public menuLetters: string[] = alphaLetters;
   public myTargetLetter: string;
 
-  showMyTarget(letter) {
+  showMyTarget(letter: string) {
     this.myTargetLetter = letter;
     this.myLetter.emit(letter)
   }

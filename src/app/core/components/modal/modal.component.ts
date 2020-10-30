@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-  @Input() opened;
+  @Input() opened: boolean;
   @Output() openedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {}

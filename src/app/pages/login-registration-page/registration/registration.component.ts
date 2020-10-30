@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registration-form-validators.const";
+
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
 import {User} from "../../../models/user-models";
+import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registration-form-validators.const";
 
 @Component({
   selector: 'app-registration',
@@ -34,7 +35,7 @@ export class RegistrationComponent extends AbstractFormComponent implements OnIn
     })
   }
 
-  public registerUser({email, password, username}): void {
+  public registerUser({email, password, username}:User): void {
     if (this.form.valid) {
     const user = {
       email,

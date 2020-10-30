@@ -28,8 +28,7 @@ const routes: Routes = [
   ],
   exports: [
     HeroSelectComponent,
-    FoundHeroComponent,
-    RouterModule
+    FoundHeroComponent
   ]
 })
 export class HeroSelectModule { }

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Hero} from "../../../models/hero-card-model";
 
 @Component({
   selector: 'app-found-hero',
@@ -6,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./found-hero.component.scss']
 })
 export class FoundHeroComponent implements OnInit {
-  @Input() foundHero;
+  @Input() foundHero: Hero;
   chooseHeroState = true;
   buttonState = 'select';
   constructor() { }

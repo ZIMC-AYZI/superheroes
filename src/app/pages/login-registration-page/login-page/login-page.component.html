@@ -12,7 +12,7 @@
           *ngIf="form.get('email').invalid && form.get('email').touched"
           class="validation"
         >
-          <small *ngIf="form.get('email').errors.required">
+          <small *ngIf="isFieldHasError('email', 'required')">
             поле не может быть пустым
           </small>
         </div>
@@ -24,7 +24,7 @@
           *ngIf="form.get('password').invalid && form.get('password').touched"
           class="validation"
         >
-          <small *ngIf="form.get('password').errors.required">
+          <small *ngIf="isFieldHasError('password', 'required')">
             Пароль не может быть пустым
           </small>
         </div>
