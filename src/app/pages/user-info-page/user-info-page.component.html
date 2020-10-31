@@ -1,17 +1,30 @@
 <div class="container">
   <div class="tabs-wrapper">
     <mat-tab-group mat-align-tabs="start">
-      <mat-tab label="Heroes list"><ng-container *ngTemplateOutlet="heroesList"></ng-container></mat-tab>
-      <mat-tab label="History"><ng-container *ngTemplateOutlet="history"></ng-container></mat-tab>
-      <mat-tab label="Power Ups"><ng-container *ngTemplateOutlet="powerUps"></ng-container></mat-tab>
+      <mat-tab label="Heroes list">
+        <ng-container *ngTemplateOutlet="heroesList"></ng-container>
+      </mat-tab>
+      <mat-tab label="History">
+        <ng-container *ngTemplateOutlet="history"></ng-container>
+      </mat-tab>
+      <mat-tab label="Power Ups">
+        <ng-container *ngTemplateOutlet="powerUps"></ng-container>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>
 <ng-template #heroesList>
-  heroesList
+  <div class="carousel-wrapper">
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let hero of selectedHeroes">
+        <app-found-hero [foundHero]="hero">
+        </app-found-hero>
+      </ng-template>
+    </ngb-carousel>
+  </div>
 </ng-template>
 <ng-template #history>
- history
+  history
 </ng-template>
 <ng-template #powerUps>
   powerUps

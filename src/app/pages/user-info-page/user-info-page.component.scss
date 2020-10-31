@@ -1,4 +1,11 @@
 .tabs-wrapper{
   display: flex;
   justify-content: center;
+  & .carousel-wrapper{
+    display: flex;
+    justify-content: space-around;
+    & .carousel-control-prev{
+      background: red;
+    }
+  }
 }

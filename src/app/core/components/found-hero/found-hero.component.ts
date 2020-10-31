@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from "../../../models/hero-card-model";
+import {UserHeroService} from "../../services/user-hero.service";
 
 @Component({
   selector: 'app-found-hero',
@@ -8,18 +9,21 @@ import {Hero} from "../../../models/hero-card-model";
 })
 export class FoundHeroComponent implements OnInit {
   @Input() foundHero: Hero;
-  chooseHeroState = true;
+  chooseHeroState = false;
   buttonState = 'select';
-  constructor() { }
+  constructor(private userHeroService: UserHeroService) { }
 
   ngOnInit(): void {
-
   }
 
   chooseThisHero() {
-    this.chooseHeroState = !this.chooseHeroState
+    this.chooseHeroState = !this.chooseHeroState;
     if (this.chooseHeroState){
-      this.buttonState = 'select'
-    } else this.buttonState = 'remove'
+      this.buttonState = 'remove';
+      this.userHeroService.addToMyHeroes(this.foundHero)
+    } else {
+      this.buttonState = 'select';
+      this.userHeroService.removeFromMyHeroes(this.foundHero)
+    }
   }
 }

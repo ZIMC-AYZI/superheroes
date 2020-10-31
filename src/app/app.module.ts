@@ -8,6 +8,7 @@ import {HeaderModule} from "./core/components/header/header.module";
 import {HttpClientModule} from "@angular/common/http";
 import {LoginPageModule} from "./pages/login-registration-page/login-page.module";
 import {AuthService} from "./core/services/auth.service";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {AuthService} from "./core/services/auth.service";
     BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
