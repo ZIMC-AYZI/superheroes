@@ -21,10 +21,10 @@
           *ngIf="form.get('userEnterValue').invalid && form.get('userEnterValue').touched"
           class="validation"
         >
-          <small *ngIf="form.get('userEnterValue').errors.required">
+          <small *ngIf="isFieldHasError('userEnterValue', 'required')">
             поле не может быть пустым
           </small>
-          <small *ngIf="form.get('userEnterValue').errors.pattern">
+          <small *ngIf="isFieldHasError('userEnterValue', 'pattern')">
             используйте только буквы
           </small>
         </div>

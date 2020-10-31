@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="tabs-wrapper">
+    <mat-tab-group mat-align-tabs="start">
+      <mat-tab label="Heroes list"><ng-container *ngTemplateOutlet="heroesList"></ng-container></mat-tab>
+      <mat-tab label="History"><ng-container *ngTemplateOutlet="history"></ng-container></mat-tab>
+      <mat-tab label="Power Ups"><ng-container *ngTemplateOutlet="powerUps"></ng-container></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+<ng-template #heroesList>
+  heroesList
+</ng-template>
+<ng-template #history>
+ history
+</ng-template>
+<ng-template #powerUps>
+  powerUps
+</ng-template>

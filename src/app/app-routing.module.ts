@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/hero-select/hero-select.module').then(m =>
     m.HeroSelectModule)
   },
+  {
+    path: 'user-info',
+    loadChildren: () => import('./pages/user-info-page/user-info-page.module').then(m =>
+      m.UserInfoPageModule)
+  },
   {path: '**', redirectTo: '/login', pathMatch: 'full'}
 ];
 
