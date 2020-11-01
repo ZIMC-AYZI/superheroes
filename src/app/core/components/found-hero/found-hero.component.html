@@ -14,8 +14,9 @@
         </p>
       </div>
     </div>
-      <div class="card-wrapper">
-        <button class="btn btn-warning" (click)="chooseThisHero()">{{ buttonState }}</button>
+      <div class="btn-wrapper">
+        <button class="btn btn-warning" [disabled]="chooseHeroState" (click)="chooseThisHero()">Select</button>
+        <button class="btn btn-info">view info</button>
       </div>
     </div>
 </div>

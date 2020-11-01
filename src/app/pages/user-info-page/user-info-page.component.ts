@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserHeroService} from "../../core/services/user-hero.service";
 import {Hero} from "../../models/hero-card-model";
+import {AuthService} from "../../core/services/auth.service";
 
 @Component({
   selector: 'app-user-info-page',
@@ -9,11 +10,16 @@ import {Hero} from "../../models/hero-card-model";
 })
 export class UserInfoPageComponent implements OnInit {
   selectedHeroes: Hero[] = [];
-  constructor(userHeroService: UserHeroService) { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    this.selectedHeroes = JSON.parse(localStorage.getItem('user-heroes'));
-    console.log(this.selectedHeroes)
+    this.selectedHeroes.push(JSON.parse(localStorage.getItem('user-heroes')));
+    this.authService.checkSession()
+  }
+  trackByFn(index, item) {
+    return item.name;
   }
 
 }

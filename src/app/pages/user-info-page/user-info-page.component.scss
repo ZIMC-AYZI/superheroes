@@ -4,8 +4,24 @@
   & .carousel-wrapper{
     display: flex;
     justify-content: space-around;
-    & .carousel-control-prev{
-      background: red;
+    & .carousel{
+      outline: none;
+    }
+    & .button-wrapper{
+      display: flex;
+      align-items: center;
+      & .add-new{
+        height: 97%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 10px;
+        & .add-new-text{
+          text-transform: uppercase;
+          transform: rotate(90deg);
+        }
+      }
     }
   }
 }

@@ -16,11 +16,17 @@
 <ng-template #heroesList>
   <div class="carousel-wrapper">
     <ngb-carousel>
-      <ng-template ngbSlide *ngFor="let hero of selectedHeroes">
+      <ng-template ngbSlide *ngFor="let hero of selectedHeroes; trackBy: trackByFn">
         <app-found-hero [foundHero]="hero">
         </app-found-hero>
       </ng-template>
     </ngb-carousel>
+    <div class="button-wrapper">
+      <button class="btn btn-block btn-danger add-new" routerLink="/hero-select">
+        <mat-icon>games</mat-icon>
+        <p class="add-new-text">add hero</p>
+      </button>
+    </div>
   </div>
 </ng-template>
 <ng-template #history>

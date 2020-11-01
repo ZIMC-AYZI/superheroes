@@ -7,8 +7,7 @@ import {Hero} from "../../models/hero-card-model";
 export class UserHeroService {
   userHeroes: Hero[] = [];
   addToMyHeroes(hero) {
-    this.userHeroes.push(hero);
-    localStorage.setItem('user-heroes', JSON.stringify(this.userHeroes));
+    localStorage.setItem('user-heroes', JSON.stringify(hero));
   }
   removeFromMyHeroes(hero) {
     this.userHeroes = this.userHeroes.filter(el => el.name !== hero.name);

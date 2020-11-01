@@ -5,6 +5,7 @@ import {UserInfoPageComponent} from "./user-info-page.component";
 import {MatTabsModule} from '@angular/material/tabs';
 import {FoundHeroModule} from "../../core/components/found-hero/found-hero.module";
 import {NgbCarouselModule, NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {MatIconModule} from "@angular/material/icon";
 
 const routes: Routes = [
   {
@@ -17,14 +18,15 @@ const routes: Routes = [
   declarations: [
     UserInfoPageComponent
   ],
-  imports: [
-    CommonModule,
-    MatTabsModule,
-    FoundHeroModule,
-    RouterModule.forChild(routes),
-    NgbModule,
-    NgbCarouselModule
-  ],
+    imports: [
+        CommonModule,
+        MatTabsModule,
+        FoundHeroModule,
+        RouterModule.forChild(routes),
+        NgbModule,
+        NgbCarouselModule,
+        MatIconModule
+    ],
   exports: [
     UserInfoPageComponent
   ]
