@@ -15,7 +15,10 @@
       </div>
     </div>
       <div class="btn-wrapper">
-        <button class="btn btn-warning" [disabled]="chooseHeroState" (click)="chooseThisHero()">Select</button>
+        <div [ngSwitch]="routeName.component.name">
+          <button *ngSwitchCase="'HeroSelectComponent'" class="btn btn-warning" [disabled]="chooseHeroState" (click)="chooseThisHero()">Select</button>
+          <button *ngSwitchCase="'UserInfoPageComponent'" class="btn btn-warning" [disabled]="chooseHeroState" (click)="chooseForFight()">Select</button>
+        </div>
         <button class="btn btn-info">view info</button>
       </div>
     </div>

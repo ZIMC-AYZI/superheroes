@@ -1,6 +1,4 @@
 .tabs-wrapper{
-  display: flex;
-  justify-content: center;
   & .carousel-wrapper{
     display: flex;
     justify-content: space-around;
@@ -10,6 +8,7 @@
     & .button-wrapper{
       display: flex;
       align-items: center;
+      margin-left: 10px;
       & .add-new{
         height: 97%;
         display: flex;
@@ -24,4 +23,10 @@
       }
     }
   }
+  & .table-wrapper{
+    & table {
+      width: 100%;
+    }
+  }
 }
+
