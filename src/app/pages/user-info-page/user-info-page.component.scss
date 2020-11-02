@@ -28,5 +28,33 @@
       width: 100%;
     }
   }
+  & .power-stats-wrapper{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    & .power-stats-item{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      & .power-img{
+        width: 100px;
+        height: 100px;
+        & img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+      & .power-stats{
+        font-size: 20px;
+        font-weight: bold;
+      }
+      & .power-left{
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+  }
 }
 

@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 export class DataServicesService {
   constructor(private http: HttpClient) { }
 
-  getData(str: string) {
+  public getData(str: string) {
     return this.http.get(`https://www.superheroapi.com/api.php/959708931182410/search/${str}`)
   }
 

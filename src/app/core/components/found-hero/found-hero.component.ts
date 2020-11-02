@@ -10,24 +10,25 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class FoundHeroComponent implements OnInit {
   @Input() foundHero: Hero;
-  chooseHeroState = false;
+  public chooseHeroState = false;
   public routeName: any;
+  public allHeroes: object[];
   constructor(
     private userHeroService: UserHeroService,
     private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.routeName = this.activeRoute
-    console.log(this.routeName)
+    this.routeName = this.activeRoute;
+    // this.userHeroService.checkInUserHeroes(this.foundHero)
   }
 
-  chooseThisHero() {
+  public chooseThisHero(): void {
     this.chooseHeroState = true;
-    this.userHeroService.addToMyHeroes(this.foundHero)
+    this.userHeroService.chooseHero(this.foundHero)
   }
 
-  chooseForFight() {
+  public chooseForFight(): void {
     this.chooseHeroState = true;
     console.log('fight')
   }

@@ -65,5 +65,17 @@
 </ng-template>
 
 <ng-template #powerUps>
-  powerUps
+  <div class="power-stats-wrapper">
+    <div class="power-stats-item" *ngFor="let item of userPowerUps">
+      <div class="power-img">
+        <img src="{{ item.imgUrl }}" >
+      </div>
+      <div class="power-stats">
+        <p>{{ item.title }}</p>
+      </div>
+      <div class="power-left">
+        <p>left : {{ item.quantity }}</p>
+      </div>
+    </div>
+  </div>
 </ng-template>

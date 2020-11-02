@@ -1,4 +1,4 @@
-import { Component, OnInit, Self } from '@angular/core';
+import {Component, OnDestroy, OnInit, Self} from '@angular/core';
 import {DataServicesService} from "../../core/services/data-services.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../core/services/auth.service";
@@ -7,6 +7,7 @@ import {Hero} from "../../models/hero-card-model";
 import {SEARCH_HEROES_VALIDATORS_CONST} from "./utils/search-heroes-validators.const";
 import {NgOnDestroy} from "../../core/services/ng-on-destroy.service";
 import {takeUntil} from "rxjs/operators";
+import {UserHeroService} from "../../core/services/user-hero.service";
 
 @Component({
   selector: 'app-hero-select',
@@ -14,7 +15,7 @@ import {takeUntil} from "rxjs/operators";
   styleUrls: ['./hero-select.component.scss'],
   providers: [NgOnDestroy]
 })
-export class HeroSelectComponent extends AbstractFormComponent implements OnInit {
+export class HeroSelectComponent extends AbstractFormComponent implements OnInit, OnDestroy {
   public result: string;
   public resultState = false;
   public foundHeroes: Hero[] = [];
@@ -25,7 +26,8 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     @Self() public ngOnDestroy$: NgOnDestroy,
     private data: DataServicesService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userHeroService: UserHeroService
   ) {
     super()
   }
@@ -68,15 +70,15 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
       })
   }
 
-  public showAlphabetical() {
+  public showAlphabetical(): void {
     this.stateAlphabetical = !this.stateAlphabetical
   }
 
-  toggleLetter(letter: string) {
+  public toggleLetter(letter: string): void {
     this.myLetter = letter
   }
 
-  searchByValueBtn(menuState: boolean) {
+  public searchByValueBtn(menuState: boolean): void {
     this.stateAlphabetical = menuState
     this.recentSearches.push(this.myLetter);
     localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
@@ -87,5 +89,8 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
         this.resultState = true;
         this.result = response.results.length;
       })
+  }
+  ngOnDestroy(): void {
+    this.userHeroService.addToMyHeroes()
   }
 }
