@@ -35,7 +35,6 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   protected initForm(): void {
     if (localStorage.getItem('recent-search')){
       this.recentSearches = [...JSON.parse(localStorage.getItem('recent-search'))];
-      console.log(...this.recentSearches)
     }
     this.form = this.fb.group({
       userEnterValue: ['', [

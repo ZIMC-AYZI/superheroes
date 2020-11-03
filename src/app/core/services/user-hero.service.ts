@@ -22,10 +22,4 @@ export class UserHeroService {
       localStorage.setItem('allHeroes', JSON.stringify(this.userHeroes));
     }
   }
-
-
-  // removeFromMyHeroes(hero) {
-  //   this.userHeroes = this.userHeroes.filter(el => el.name !== hero.name);
-  //   localStorage.setItem('user-hero', JSON.stringify(this.userHeroes))
-  // }
 }

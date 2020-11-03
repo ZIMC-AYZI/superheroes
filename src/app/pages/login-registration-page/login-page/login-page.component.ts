@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
 import {User} from "../../../models/user-models";
+import {myRoutes} from "../../../core/routes/routes";
 
 @Component({
   selector: 'app-login-page',
@@ -44,7 +45,6 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
     if (this.form.valid) {
       this.userData.forEach(el => {
         if (email === el.email && password === el.password){
-          console.log(el);
           this.authService.signIn();
           this.router.navigate(['hero-select']);
           console.log('вы вошли')

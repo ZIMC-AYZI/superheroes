@@ -44,7 +44,6 @@ export class RegistrationComponent extends AbstractFormComponent implements OnIn
     };
     this.userData.push(user);
      localStorage.setItem('users', JSON.stringify(this.userData))
-      console.log(this.userData)
     }
     this.form.reset()
   }
