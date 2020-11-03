@@ -9,7 +9,7 @@
           <input type="text" formControlName="email">
         </div>
         <div
-          *ngIf="form.get('email').invalid && form.get('email').touched"
+          *ngIf="getField('email').invalid && getField('email').touched"
           class="validation"
         >
           <small *ngIf="isFieldHasError('email', 'required')">
@@ -25,7 +25,7 @@
           <input type="password" formControlName="password">
         </div>
         <div
-          *ngIf="form.get('password').invalid && form.get('password').touched"
+          *ngIf="getField('password').invalid && getField('password').touched"
           class="validation"
         >
           <small *ngIf="isFieldHasError('password', 'required')">
@@ -41,7 +41,7 @@
           <input type="text" formControlName="username">
         </div>
         <div
-          *ngIf="form.get('username').invalid && form.get('username').touched"
+          *ngIf="getField('username').invalid && getField('username').touched"
           class="validation"
         >
           <small *ngIf="isFieldHasError('username', 'required')">

@@ -6,7 +6,8 @@ import {Hero} from "../../models/hero-card-model";
 })
 export class UserHeroService {
   private userHeroes: Hero[] = [];
-  private currentHero: Hero
+  private currentHero: Hero;
+  private displayHero: Hero;
   public chooseHero(hero): void {
     localStorage.setItem('user-hero', JSON.stringify(hero));
   }
@@ -21,5 +22,11 @@ export class UserHeroService {
       }
       localStorage.setItem('allHeroes', JSON.stringify(this.userHeroes));
     }
+  }
+  public setDisplayHero(hero) {
+    this.displayHero = hero;
+  }
+  public getDisplayHero() {
+    return this.displayHero
   }
 }

@@ -8,6 +8,7 @@ import {SEARCH_HEROES_VALIDATORS_CONST} from "./utils/search-heroes-validators.c
 import {NgOnDestroy} from "../../core/services/ng-on-destroy.service";
 import {takeUntil} from "rxjs/operators";
 import {UserHeroService} from "../../core/services/user-hero.service";
+import {User} from "../../models/user-models";
 
 @Component({
   selector: 'app-hero-select',
@@ -51,7 +52,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
       localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
       this.data.getData(this.form.value.userEnterValue)
         .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe((response: any) => {
+        .subscribe((response: Hero[]) => {
           this.foundHeroes = response.results;
           this.resultState = true;
           this.result = response.results.length;
@@ -62,7 +63,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   public recentSearch(recent: string): void {
     this.data.getData(recent)
       .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((response: any) => {
+      .subscribe((response: Hero[]) => {
         this.foundHeroes = response.results;
         this.resultState = true;
         this.result = response.results.length;
@@ -83,7 +84,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
     this.data.getData(this.myLetter)
       .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((response: any) => {
+      .subscribe((response: Hero[]) => {
         this.foundHeroes = response.results;
         this.resultState = true;
         this.result = response.results.length;

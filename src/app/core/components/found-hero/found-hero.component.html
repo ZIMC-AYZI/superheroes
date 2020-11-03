@@ -1,25 +1,26 @@
-<div class="card">
-  <div class="card-body">
-    <div class="card-wrapper">
-      <div class="card-img">
-        <img [src]="foundHero.image.url" alt="">
-      </div>
-      <h5 class="card-title">{{ foundHero.name | titlecase}}</h5>
-    </div>
-    <div class="card-wrapper">
-      <p class="card-text">PowerStats</p>
-      <div class="power-stats">
-        <p *ngFor="let stat of foundHero.powerstats | keyvalue">
-          {{ stat.key | titlecase }} : {{ stat.value }}
-        </p>
-      </div>
-    </div>
-      <div class="btn-wrapper">
-        <div [ngSwitch]="routeName.component.name">
-          <button *ngSwitchCase="'HeroSelectComponent'" class="btn btn-warning" [disabled]="chooseHeroState" (click)="chooseThisHero()">Select</button>
-          <button *ngSwitchCase="'UserInfoPageComponent'" class="btn btn-warning" [disabled]="chooseHeroState" (click)="chooseForFight()">Select</button>
-        </div>
-        <button class="btn btn-info">view info</button>
-      </div>
-    </div>
+<div class="hero-card">
+  <div class="energy">
+    <p class="power-stat">{{ foundHero.powerstats.strength }}</p>
+  </div>
+  <div class="speed">
+    <p class="power-stat">{{ foundHero.powerstats.speed }}</p>
+  </div>
+  <div class="power">
+    <p class="power-stat">{{ foundHero.powerstats.power }}</p>
+  </div>
+  <div class="combat">
+    <p class="power-stat">{{ foundHero.powerstats.combat }}</p>
+  </div>
+  <div class="durability">
+    <p class="power-stat">{{ foundHero.powerstats.durability }}</p>
+  </div>
+  <div class="Intelligence">
+    <p class="power-stat">{{ foundHero.powerstats.intelligence }}</p>
+  </div>
+  <img [src]="foundHero.image.url" alt="">
+  <div class="btn-wrapper">
+    <button class="btn btn-warning" [disabled]="chooseHeroState" (click)="select()">Select</button>
+    <p>{{ foundHero.name | titlecase}}</p>
+    <button class="btn btn-info" (click)="viewHeroInfo()">view info</button>
+  </div>
 </div>

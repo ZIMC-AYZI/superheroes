@@ -13,7 +13,7 @@ import {LoginPageModule} from "./pages/login-registration-page/login-page.module
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     HeaderModule,

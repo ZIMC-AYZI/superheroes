@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/services/auth.service";
@@ -12,8 +12,8 @@ import {myRoutes} from "../../../core/routes/routes";
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent extends AbstractFormComponent implements OnInit {
-  private userData: User[] = [];
   public showModal = false;
+  private userData: User[] = [];
 
   constructor(
     private router: Router,
@@ -24,7 +24,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
   }
 
   protected initForm(): void {
-    if (localStorage.getItem('users')){
+    if (localStorage.getItem('users')) {
       const userStorage = JSON.parse(localStorage.getItem('users'));
       this.userData.push(...userStorage)
     }
@@ -41,16 +41,17 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
     console.log(this.showModal)
   }
 
-  public login({email, password}): void {
+  public login({email, password}: User): void {
     if (this.form.valid) {
       this.userData.forEach(el => {
-        if (email === el.email && password === el.password){
+        if (email === el.email && password === el.password) {
           this.authService.signIn();
           this.router.navigate(['hero-select']);
           console.log('вы вошли')
         } else console.log('такого нету')
       })
-    } this.form.reset()
+    }
+    this.form.reset()
 
   }
 

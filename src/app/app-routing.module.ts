@@ -15,6 +15,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user-info-page/user-info-page.module').then(m =>
       m.UserInfoPageModule)
   },
+  {
+    path: myRoutes.heroInfoPage.routerPath,
+    loadChildren: () => import('./core/components/hero-info/hero-info.module').then(m =>
+    m.HeroInfoModule
+    )
+  },
   {path: '**', redirectTo: myRoutes.logIn.fullPath, pathMatch: 'full'}
 ];
 
