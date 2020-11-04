@@ -3,7 +3,7 @@
   margin-top: 5%;
   & .avatar{
     & .card-img{
-      border: 5px solid #000;
+      border: 5px solid #0065bb;
       width: 300px;
       height: 400px;
       & img{
@@ -13,10 +13,14 @@
     }
   }
   & .hero-info{
-    border: 5px solid #000;
+    border: 5px solid #0065bb;
     & ul{
       width: 600px;
       text-align: center;
+      & .info-title{
+        font-weight: bold;
+        text-transform: uppercase;
+      }
       & li{
         margin: 10px 0;
         font-size: 40px;

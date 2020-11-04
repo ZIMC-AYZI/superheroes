@@ -52,7 +52,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
       localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
       this.data.getData(this.form.value.userEnterValue)
         .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe((response: Hero[]) => {
+        .subscribe((response: any) => {
           this.foundHeroes = response.results;
           this.resultState = true;
           this.result = response.results.length;
@@ -63,7 +63,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   public recentSearch(recent: string): void {
     this.data.getData(recent)
       .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((response: Hero[]) => {
+      .subscribe((response: any) => {
         this.foundHeroes = response.results;
         this.resultState = true;
         this.result = response.results.length;
@@ -84,7 +84,8 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
     this.data.getData(this.myLetter)
       .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((response: Hero[]) => {
+      .subscribe((response: any) => {
+        console.log(response)
         this.foundHeroes = response.results;
         this.resultState = true;
         this.result = response.results.length;

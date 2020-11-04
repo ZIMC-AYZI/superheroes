@@ -17,7 +17,7 @@ export abstract class AbstractFormComponent implements OnInit{
     return this.form.get(fieldName).errors;
   }
 
-  public getField(fieldName: string): object {
+  public getField(fieldName: string) {
     return this.form.get(fieldName)
   }
 
