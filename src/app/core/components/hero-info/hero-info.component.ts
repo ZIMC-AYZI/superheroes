@@ -16,7 +16,6 @@ export class HeroInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.foundHero = this.userHeroService.getDisplayHero()
-    console.log(this.foundHero)
   }
 
 }

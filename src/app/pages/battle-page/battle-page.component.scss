@@ -1,0 +1,79 @@
+.battle-wrapper{
+  display: flex;
+  justify-content: space-around;
+  & .left-side{
+   display: flex;
+    justify-content: center;
+  }
+  & .middle-side{
+    width: 400px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    & .content-wrapper{
+      & .hero-name{
+        margin: 10px 0 10px 0;
+        font-size: 30px;
+        font-weight: bold;
+      }
+      & .start-fight{
+        padding: 10px 70px;
+      }
+    }
+    .power-stats-wrapper{
+      display: flex;
+      justify-content: space-around;
+      margin-top: 40px;
+      & .power-stats-item{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: center;
+        align-items: center;
+        &:hover{
+          background: rgba(6, 0, 255, 0.3);
+        }
+        & .power-img{
+          cursor: pointer;
+          border: none;
+          outline: none;
+          padding: 0;
+          margin: 0;
+          width: 50px;
+          height: 50px;
+          & img{
+            width: 100%;
+            height: 100%;
+          }
+          & :disabled{
+            opacity: 0.5;
+          }
+        }
+        & .power-stats{
+          font-size: 9px;
+          font-weight: bold;
+          width: 100px;
+          display: flex;
+          justify-content: center;
+          margin: 5px 0;
+        }
+        & .power-left{
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  & .right-side{
+    display: flex;
+    justify-content: center;
+    & .spinner-wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 500px;
+    }
+  }
+}

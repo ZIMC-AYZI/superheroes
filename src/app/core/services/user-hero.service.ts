@@ -29,4 +29,10 @@ export class UserHeroService {
   public getDisplayHero() {
     return this.displayHero
   }
+  public setHeroForFight(hero) {
+    localStorage.setItem('fight-hero', JSON.stringify(hero));
+  }
+  public getHeroForFight() {
+    return JSON.parse(localStorage.getItem('fight-hero'));
+  }
 }

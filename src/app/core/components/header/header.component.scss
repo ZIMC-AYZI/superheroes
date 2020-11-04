@@ -13,14 +13,7 @@
     text-transform: uppercase;
     font-size: 20px;
   }
-  & .nav-wrapper{
-    & .nav-list{
-      display: flex;
-      justify-content: space-around;
-      &__item{
-        padding: 10px;
-        width: 200px;
-      }
-    }
+  & .battle-wrapper{
+    width: 85%;
   }
 }

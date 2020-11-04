@@ -21,6 +21,12 @@ const routes: Routes = [
     m.HeroInfoModule
     )
   },
+  {
+    path: myRoutes.battlePage.routerPath,
+    loadChildren: () => import('./pages/battle-page/battle-page.module').then(m =>
+    m.BattlePageModule
+    )
+  },
   {path: '**', redirectTo: myRoutes.logIn.fullPath, pathMatch: 'full'}
 ];
 

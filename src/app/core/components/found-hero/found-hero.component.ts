@@ -29,8 +29,7 @@ export class FoundHeroComponent implements OnInit {
 
   public chooseForFight(): void {
     this.chooseHeroState = true;
-    //TODO:
-    console.log('fight')
+    this.userHeroService.setHeroForFight(this.foundHero)
   }
 
   public viewHeroInfo(): void {
@@ -43,6 +42,13 @@ export class FoundHeroComponent implements OnInit {
       this.chooseThisHero()
     }else if (typeof this.activeRoute.component !== "string" && this.activeRoute.component.name === 'UserInfoPageComponent') {
       this.chooseForFight()
+    }
+  }
+  public hideSelectBtn(): boolean {
+    if (typeof this.activeRoute.component !== "string" && this.activeRoute.component.name !== 'BattlePageComponent'){
+      return true
+    } else {
+      return false
     }
   }
 }

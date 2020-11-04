@@ -11,4 +11,7 @@ export class DataServicesService {
     return this.http.get(`https://www.superheroapi.com/api.php/959708931182410/search/${str}`)
   }
 
+  public getById(id: number) {
+    return this.http.get(`https://www.superheroapi.com/api.php/959708931182410/${id}`)
+  }
 }

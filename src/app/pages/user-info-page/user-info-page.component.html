@@ -43,13 +43,13 @@
 
       <ng-container matColumnDef="heroName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Hero name </th>
-        <td mat-cell *matCellDef="let element"> {{element.heroName}} </td>
+        <td class="hero-link" mat-cell *matCellDef="let element" (click)="showInfoMyHero(element)"> {{element.heroName}} </td>
       </ng-container>
 
 
       <ng-container matColumnDef="OpponentName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Opponent name </th>
-        <td mat-cell *matCellDef="let element"> {{element.opponentName}} </td>
+        <td class="hero-link" mat-cell *matCellDef="let element" (click)="showInfoOpponent(element)"> {{element.opponentName}} </td>
       </ng-container>
 
 

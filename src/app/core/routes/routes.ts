@@ -5,5 +5,6 @@ export const myRoutes: IAppRoutes = {
   register: { routerPath: 'register', fullPath: '/register' },
   heroSelectPage: { routerPath: 'hero-select'},
   userInfoPage: { routerPath: 'user-info'},
-  heroInfoPage: {routerPath: 'hero-info' }
+  heroInfoPage: {routerPath: 'hero-info' },
+  battlePage: {routerPath: 'battle-page'}
 }

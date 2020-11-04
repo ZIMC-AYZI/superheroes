@@ -1,5 +1,6 @@
 import {Directive, OnInit} from "@angular/core";
-import {FormGroup, ValidationErrors} from "@angular/forms";
+import { FormGroup, ValidationErrors} from "@angular/forms";
+import { FormInterface } from "../../models/form-control-models";
 
 @Directive()
 export abstract class AbstractFormComponent implements OnInit{
@@ -17,7 +18,7 @@ export abstract class AbstractFormComponent implements OnInit{
     return this.form.get(fieldName).errors;
   }
 
-  public getField(fieldName: string) {
+  public getField(fieldName: string): FormInterface {
     return this.form.get(fieldName)
   }
 

@@ -19,7 +19,7 @@
   </div>
   <img [src]="foundHero.image.url" alt="">
   <div class="btn-wrapper">
-    <button class="btn btn-warning" [disabled]="chooseHeroState" (click)="select()">Select</button>
+    <button class="btn btn-warning" *ngIf="hideSelectBtn()" [disabled]="chooseHeroState" (click)="select()">Select</button>
     <p>{{ foundHero.name | titlecase}}</p>
     <button class="btn btn-info" (click)="viewHeroInfo()">view info</button>
   </div>

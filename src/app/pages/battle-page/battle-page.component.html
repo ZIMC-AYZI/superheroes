@@ -1,0 +1,34 @@
+<div *ngIf="hero" class="battle-wrapper">
+  <div class="left-side">
+    <app-found-hero [foundHero]="hero"></app-found-hero>
+  </div>
+  <div class="middle-side">
+    <div class="content-wrapper">
+      <p class="hero-name">{{ hero.name }}</p>
+      <button class="btn btn-danger start-fight" (click)="fight()">start</button>
+      <p *ngIf="enemy" class="hero-name">{{ enemy.name }}</p>
+    </div>
+    <div class="power-stats-wrapper">
+      <div class="power-stats-item" *ngFor="let item of userPowerUps">
+        <button class="power-img" [disabled]="isSelect" (click)="selectPower(item)">
+          <img src="{{ item.imgUrl }}">
+        </button>
+        <div class="power-stats">
+          <p>{{ item.title }}</p>
+        </div>
+        <div class="power-left">
+          <p>left : {{ item.quantity }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-side">
+    <app-found-hero *ngIf="enemy else spinner" [foundHero]="enemy"></app-found-hero>
+    <ng-template #spinner>
+      <div class="spinner-wrapper">
+         <mat-progress-spinner mode="indeterminate" color="warn" class="m-auto"></mat-progress-spinner>
+      </div>
+    </ng-template>
+  </div>
+</div>
+<app-modal *ngIf="showModal" (openedChange)="closeModal($event)">You {{ resultFight }}</app-modal>

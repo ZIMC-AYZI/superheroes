@@ -9,6 +9,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./core/services/auth.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {LoginPageModule} from "./pages/login-registration-page/login-page.module";
+import {BattlePageModule} from "./pages/battle-page/battle-page.module";
 
 
 @NgModule({
@@ -18,12 +19,13 @@ import {LoginPageModule} from "./pages/login-registration-page/login-page.module
   imports: [
     HeaderModule,
     LoginPageModule,
+    BattlePageModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
-    NgbModule,
+    NgbModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

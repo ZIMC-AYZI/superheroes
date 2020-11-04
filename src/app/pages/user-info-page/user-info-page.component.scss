@@ -26,6 +26,12 @@
   & .table-wrapper{
     & table {
       width: 100%;
+      & .hero-link{
+        cursor: pointer;
+        &:hover{
+          background: #f8f9fa;
+        }
+      }
     }
   }
   & .power-stats-wrapper{
