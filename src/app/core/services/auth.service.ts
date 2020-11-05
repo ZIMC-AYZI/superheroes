@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +6,8 @@ import {Router} from "@angular/router";
 export class AuthService {
   private isAuth: boolean;
   private myToken: number;
-  private showModal = false;
   private expireDate = 10000;
-
-  constructor(private router: Router) {
-  }
+  private sessionEnd = true;
 
   public signIn(): void {
     this.myToken = Date.now();
@@ -24,9 +20,13 @@ export class AuthService {
     this.isAuth = false;
   }
 
-  public tokenState(): boolean {
-    return this.showModal;
+  stateSessionForGuard(state) {
+    this.sessionEnd = state;
   }
+  getSessionEnd() {
+    return this.sessionEnd
+  }
+
 
   getAuthState() {
     return this.isAuth
@@ -46,11 +46,13 @@ export class AuthService {
       const currentDate = Date.now();
       const userSession = currentDate - loginTime;
       if (userSession >= this.expireDate) {
-        this.router.navigate(['login']);
-        console.log('сеанс окончен')
         this.logout();
-        this.showModal = true;
         localStorage.removeItem('recent-search');
+        localStorage.removeItem('fight-data');
+        localStorage.removeItem('power-ups');
+        localStorage.removeItem('all-heroes');
+        localStorage.removeItem('fight-hero');
+        localStorage.removeItem('user-hero');
       }
     } else console.log('войдите')
   }

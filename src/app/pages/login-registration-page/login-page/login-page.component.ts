@@ -5,6 +5,7 @@ import {AuthService} from "../../../core/services/auth.service";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
 import {User} from "../../../models/user-models";
 import {myRoutes} from "../../../core/routes/routes";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login-page',
@@ -12,13 +13,13 @@ import {myRoutes} from "../../../core/routes/routes";
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent extends AbstractFormComponent implements OnInit {
-  public showModal = false;
   private userData: User[] = [];
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService,
   ) {
     super();
   }
@@ -36,9 +37,11 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
         Validators.required,
       ]]
     });
-    this.authService.checkSession();
-    this.showModal = this.authService.tokenState();
-    console.log(this.showModal)
+    if (!this.authService.getSessionEnd()){
+      this.toastr.error('Сделайте авторизацию если хотите продолжить', 'Ваша сессия окончена', {
+        positionClass: 'toast-top-center',
+      });
+    }
   }
 
   public login({email, password}: User): void {
@@ -46,13 +49,18 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
       this.userData.forEach(el => {
         if (email === el.email && password === el.password) {
           this.authService.signIn();
-          this.router.navigate([myRoutes.heroSelectPage.routerPath]);
+          this.toastr.success('Добро пожаловать, отправляю вас на поле выбора героя', `${el.username}`, {
+            timeOut: 2000,
+            positionClass: 'toast-top-center',
+          });
+          setTimeout(() => {
+            this.router.navigate([myRoutes.heroSelectPage.routerPath]);
+          }, 2000)
           console.log('вы вошли')
         } else console.log('такого нету')
       })
     }
     this.form.reset()
-
   }
 
   public goToRegister(): void {

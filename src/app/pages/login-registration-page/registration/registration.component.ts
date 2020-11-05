@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
 import {User} from "../../../models/user-models";
 import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registration-form-validators.const";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +14,9 @@ import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registrat
 export class RegistrationComponent extends AbstractFormComponent implements OnInit {
   private userData: User[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+  ) {
     super();
   }
 

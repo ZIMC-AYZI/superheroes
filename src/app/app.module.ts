@@ -10,6 +10,7 @@ import {AuthService} from "./core/services/auth.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {LoginPageModule} from "./pages/login-registration-page/login-page.module";
 import {BattlePageModule} from "./pages/battle-page/battle-page.module";
+import {ToastrModule} from "ngx-toastr";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {BattlePageModule} from "./pages/battle-page/battle-page.module";
     BrowserAnimationsModule,
     MatToolbarModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -1,8 +1,7 @@
-import {Component, Input, OnInit, Self} from '@angular/core';
+import {Component, OnInit, Self} from '@angular/core';
 import {UserHeroService} from "../../core/services/user-hero.service";
 import {Hero} from "../../models/hero-card-model";
 import {PowerUp} from "../../models/power-ups-models";
-import {powerUps} from "../../shared/utils/constants/powerups.const";
 import {DataServicesService} from "../../core/services/data-services.service";
 import {mergeMap, takeUntil} from "rxjs/operators";
 import {NgOnDestroy} from "../../core/services/ng-on-destroy.service";
@@ -10,6 +9,8 @@ import {FightTableDataService} from "../../core/services/fight-table-data.servic
 import {TableDataModels} from "../../models/table-data-models";
 import {timer} from "rxjs";
 import {PowerUpsService} from "../../core/services/power-ups.service";
+import {AuthService} from "../../core/services/auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-battle-page',
@@ -22,7 +23,6 @@ export class BattlePageComponent implements OnInit {
   public userPowerUps: PowerUp[];
   public enemy: Hero;
   public resultFight: string;
-  public showModal = false;
   public isSelect = false;
 
   constructor(
@@ -30,7 +30,9 @@ export class BattlePageComponent implements OnInit {
     private userHeroService: UserHeroService,
     private data: DataServicesService,
     private fightTableDataService: FightTableDataService,
-    private powerUpsService: PowerUpsService
+    private powerUpsService: PowerUpsService,
+    private authService: AuthService,
+    private toastr: ToastrService,
   ) {
   }
 
@@ -38,6 +40,7 @@ export class BattlePageComponent implements OnInit {
     this.userPowerUps = this.powerUpsService.getPowerUps();
     this.hero = this.userHeroService.getHeroForFight();
     this.getRandomEnemy()
+    this.authService.checkSession()
   }
 
   public getRandom(): number {
@@ -77,20 +80,20 @@ export class BattlePageComponent implements OnInit {
       this.getRandomEnemy();
       this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
       this.enemy = null;
-      this.showModal = true;
+      this.toastr.success(`${this.resultFight}`,'You',{
+        positionClass: 'toast-top-center',
+      });
     } else {
       this.powerUpsService.setToLocalStorage()
       this.resultFight = 'Loose';
       this.getRandomEnemy();
       this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
       this.enemy = null
-      this.showModal = true;
+      this.toastr.error(`${this.resultFight}`,'You', {
+        positionClass: 'toast-top-center',
+      });
     }
     this.isSelect = !this.isSelect
-  }
-
-  public closeModal(modalState: boolean): void {
-    this.showModal = modalState
   }
 
   public selectPower(item: PowerUp): void {

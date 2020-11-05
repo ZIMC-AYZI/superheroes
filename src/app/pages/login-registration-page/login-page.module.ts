@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {RegistrationComponent} from "./registration/registration.component";
-import {ModalModule} from "../../core/components/modal/modal.module";
 import {RouterModule, Routes} from "@angular/router";
 import {myRoutes} from "../../core/routes/routes";
 
@@ -27,7 +26,6 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    ModalModule,
     RouterModule.forChild(routes)
   ],
   exports: [

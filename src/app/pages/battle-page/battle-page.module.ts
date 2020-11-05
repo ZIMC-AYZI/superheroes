@@ -4,7 +4,6 @@ import {BattlePageComponent} from "./battle-page.component";
 import {RouterModule, Routes} from "@angular/router";
 import {FoundHeroModule} from "../../core/components/found-hero/found-hero.module";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner"
-import {ModalModule} from "../../core/components/modal/modal.module";
 
 const routes: Routes = [
   {
@@ -18,8 +17,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     FoundHeroModule,
-    MatProgressSpinnerModule,
-    ModalModule
+    MatProgressSpinnerModule
   ],
   exports: [
     BattlePageComponent
