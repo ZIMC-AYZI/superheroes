@@ -46,7 +46,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
       this.userData.forEach(el => {
         if (email === el.email && password === el.password) {
           this.authService.signIn();
-          this.router.navigate(['hero-select']);
+          this.router.navigate([myRoutes.heroSelectPage.routerPath]);
           console.log('вы вошли')
         } else console.log('такого нету')
       })
@@ -56,6 +56,6 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
   }
 
   public goToRegister(): void {
-    this.router.navigate(['register'])
+    this.router.navigate([myRoutes.register.fullPath])
   }
 }

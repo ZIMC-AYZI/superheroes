@@ -18,7 +18,7 @@
              type="text"
              formControlName="userEnterValue">
         <div
-          *ngIf="form.get('userEnterValue').invalid && form.get('userEnterValue').touched"
+          *ngIf="getField('userEnterValue').invalid && getField('userEnterValue').touched"
           class="validation"
         >
           <small *ngIf="isFieldHasError('userEnterValue', 'required')">

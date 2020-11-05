@@ -10,16 +10,11 @@ import {myRoutes} from "../../core/routes/routes";
 const routes: Routes = [
   {
     path: '',
-    children: [
-      {
-        path: myRoutes.logIn.routerPath,
-        component: LoginPageComponent
-      },
-      {
-        path: myRoutes.register.routerPath,
-        component: RegistrationComponent
-      }
-    ]
+    component: LoginPageComponent
+  },
+  {
+    path: myRoutes.register.routerPath,
+    component: RegistrationComponent
   }
 ];
 

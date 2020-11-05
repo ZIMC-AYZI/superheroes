@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {PowerUp} from "../../models/power-ups-models";
 import {powerUps} from "../../shared/utils/constants/powerups.const";
 
@@ -6,21 +6,22 @@ import {powerUps} from "../../shared/utils/constants/powerups.const";
   providedIn: 'root'
 })
 export class PowerUpsService {
-  private myPowerUps:PowerUp[] = powerUps;
-  updatePowerUps(item) {
+  private myPowerUps: PowerUp[] = this.getPowerUps() || powerUps;
+
+  public updatePowerUps(item: PowerUp): void {
     this.myPowerUps = this.myPowerUps.map(el => {
-     if (el.param === item.param) {
-       el = item;
-     }
-     return el
-    })
-    localStorage.setItem('power-ups', JSON.stringify(this.myPowerUps))
+      if (el.param === item.param) {
+        el = item;
+      }
+      return el
+    });
   }
 
-  setToLocalStorage() {
+  public setToLocalStorage(): void {
     localStorage.setItem('power-ups', JSON.stringify(this.myPowerUps));
   }
-  getPowerUps() {
+
+  public getPowerUps(): PowerUp[] {
     return JSON.parse(localStorage.getItem('power-ups'));
   }
 }

@@ -24,6 +24,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   public recentSearches: string[] = [];
   public stateAlphabetical = false;
   public myLetter: string = 'A';
+
   constructor(
     @Self() public ngOnDestroy$: NgOnDestroy,
     private data: DataServicesService,
@@ -35,7 +36,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   }
 
   protected initForm(): void {
-    if (localStorage.getItem('recent-search')){
+    if (localStorage.getItem('recent-search')) {
       this.recentSearches = [...JSON.parse(localStorage.getItem('recent-search'))];
     }
     this.form = this.fb.group({
@@ -48,7 +49,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   }
 
   public findHeroes(): void {
-    if (this.form.valid){
+    if (this.form.valid) {
       this.recentSearches.push(this.form.value.userEnterValue);
       localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
       this.data.getData(this.form.value.userEnterValue)
@@ -91,6 +92,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
         this.result = response.results.length;
       })
   }
+
   ngOnDestroy(): void {
     this.userHeroService.addToMyHeroes()
   }

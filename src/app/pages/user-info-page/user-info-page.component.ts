@@ -1,9 +1,8 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, Self, ViewChild} from '@angular/core';
 import {Hero} from "../../models/hero-card-model";
 import {AuthService} from "../../core/services/auth.service";
-import { MatSort } from "@angular/material/sort";
-import { MatTableDataSource } from '@angular/material/table';
-import {powerUps} from "../../shared/utils/constants/powerups.const";
+import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource} from '@angular/material/table';
 import {PowerUp} from "../../models/power-ups-models";
 import {FightTableDataService} from "../../core/services/fight-table-data.service";
 import {TableDataModels} from "../../models/table-data-models";
@@ -13,6 +12,7 @@ import {DataServicesService} from "../../core/services/data-services.service";
 import {NgOnDestroy} from "../../core/services/ng-on-destroy.service";
 import {Router} from "@angular/router";
 import {PowerUpsService} from "../../core/services/power-ups.service";
+import {myRoutes} from "../../core/routes/routes";
 
 
 @Component({
@@ -21,7 +21,7 @@ import {PowerUpsService} from "../../core/services/power-ups.service";
   styleUrls: ['./user-info-page.component.scss'],
   providers: [NgOnDestroy]
 })
-export class UserInfoPageComponent implements OnInit,AfterViewInit, OnDestroy{
+export class UserInfoPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public selectedHeroes: Hero[] = [];
   public userPowerUps: PowerUp[] = [];
   public displayedColumns: string[] = ['battleTime', 'heroName', 'OpponentName', 'result'];
@@ -33,12 +33,13 @@ export class UserInfoPageComponent implements OnInit,AfterViewInit, OnDestroy{
   constructor(
     @Self() public ngOnDestroy$: NgOnDestroy,
     private authService: AuthService,
-    private fightTableDataService:FightTableDataService,
+    private fightTableDataService: FightTableDataService,
     private userHeroService: UserHeroService,
-    private data:DataServicesService,
+    private data: DataServicesService,
     private router: Router,
-    private powerUpsService:PowerUpsService
-  ) { }
+    private powerUpsService: PowerUpsService
+  ) {
+  }
 
   ngOnInit(): void {
     this.powerUpsService.setToLocalStorage();
@@ -47,6 +48,7 @@ export class UserInfoPageComponent implements OnInit,AfterViewInit, OnDestroy{
     this.selectedHeroes = JSON.parse(localStorage.getItem('allHeroes'));
     this.authService.checkSession();
   }
+
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort
   }
@@ -55,28 +57,30 @@ export class UserInfoPageComponent implements OnInit,AfterViewInit, OnDestroy{
   public trackByFn(index, item): void {
     return item.name;
   }
+
   ngOnDestroy(): void {
     if (localStorage.getItem('user-hero')) {
       localStorage.removeItem('user-hero')
     }
   }
 
-  showInfoMyHero(element) {
+  public showInfoMyHero(element: TableDataModels): void {
     this.data.getById(element.heroId)
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((response: Hero) => {
         this.heroInTable = response
         this.userHeroService.setDisplayHero(this.heroInTable)
-        this.router.navigate(['hero-info'])
+        this.router.navigate([myRoutes.heroInfoPage.routerPath])
       })
   }
-  showInfoOpponent(element) {
+
+  public showInfoOpponent(element: TableDataModels): void {
     this.data.getById(element.opponentId)
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((response: Hero) => {
         this.heroInTable = response
         this.userHeroService.setDisplayHero(this.heroInTable)
-        this.router.navigate(['hero-info'])
+        this.router.navigate([myRoutes.heroInfoPage.routerPath])
       })
   }
 

@@ -24,7 +24,6 @@ export class BattlePageComponent implements OnInit {
   public resultFight: string;
   public showModal = false;
   public isSelect = false;
-  private isFight = false;
 
   constructor(
     @Self() public ngOnDestroy$: NgOnDestroy,
@@ -41,12 +40,12 @@ export class BattlePageComponent implements OnInit {
     this.getRandomEnemy()
   }
 
-  public getRandom() {
+  public getRandom(): number {
     let random = Math.floor((Math.random() * 731) + 1);
     return random;
   }
 
-  getRandomEnemy() {
+  public getRandomEnemy(): void {
     timer(3000).pipe(mergeMap(() =>
       this.data.getById(this.getRandom())
     ))
@@ -56,11 +55,11 @@ export class BattlePageComponent implements OnInit {
       })
   }
 
-  heroPower(hero) {
+  public heroPower(hero: object): number {
     return Object.values(hero).reduce((a, b) => +a + +b);
   }
 
-  createFightData(result): TableDataModels {
+  public createFightData(result: string): TableDataModels {
     return {
       battleTime: new Date(),
       heroName: this.hero.name,
@@ -71,37 +70,35 @@ export class BattlePageComponent implements OnInit {
     };
   }
 
-  fight() {
+  public fight(): void {
     if (this.heroPower(this.hero.powerstats) >= this.heroPower(this.enemy.powerstats)) {
+      this.powerUpsService.setToLocalStorage()
       this.resultFight = 'Win';
       this.getRandomEnemy();
       this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
       this.enemy = null;
       this.showModal = true;
-      this.isFight = true;
     } else {
+      this.powerUpsService.setToLocalStorage()
       this.resultFight = 'Loose';
       this.getRandomEnemy();
       this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
       this.enemy = null
       this.showModal = true;
-      this.isFight = true;
     }
-
+    this.isSelect = !this.isSelect
   }
 
-  closeModal(modalState: boolean) {
+  public closeModal(modalState: boolean): void {
     this.showModal = modalState
   }
 
-  selectPower(item: PowerUp) {
+  public selectPower(item: PowerUp): void {
     if (item.quantity > 0) {
       this.hero.powerstats[item.param.toLowerCase()] = +this.hero.powerstats[item.param.toLowerCase()] + item.stats;
       --item.quantity;
       this.isSelect = !this.isSelect;
-      if (this.isFight){
-        this.powerUpsService.updatePowerUps(item)
-      }
+      this.powerUpsService.updatePowerUps(item)
     }
   }
 }

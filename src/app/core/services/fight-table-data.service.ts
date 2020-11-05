@@ -7,11 +7,12 @@ import {TableDataModels} from "../../models/table-data-models";
 export class FightTableDataService {
   private fightsData: TableDataModels[] = localStorage.getItem('fight-data') ? JSON.parse(localStorage.getItem('fight-data')) : [];
 
-  setToLocalStorage(obj: TableDataModels) {
+  public setToLocalStorage(obj: TableDataModels) {
     this.fightsData.push(obj);
     localStorage.setItem('fight-data', JSON.stringify(this.fightsData))
   }
-  getDataFromLocalStorage() {
+
+  public getDataFromLocalStorage(): TableDataModels[] {
     return JSON.parse(localStorage.getItem('fight-data'))
   }
 }
