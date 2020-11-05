@@ -8,7 +8,7 @@ export class FightTableDataService {
   private fightsData: TableDataModels[] = localStorage.getItem('fight-data') ? JSON.parse(localStorage.getItem('fight-data')) : [];
 
   public setToLocalStorage(obj: TableDataModels) {
-    this.fightsData.push(obj);
+    this.fightsData = [...this.fightsData, obj]
     localStorage.setItem('fight-data', JSON.stringify(this.fightsData))
   }
 

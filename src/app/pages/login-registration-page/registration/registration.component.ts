@@ -46,7 +46,7 @@ export class RegistrationComponent extends AbstractFormComponent implements OnIn
         password,
         username
       };
-      this.userData.push(user);
+      this.userData = [...this.userData, user];
       localStorage.setItem('users', JSON.stringify(this.userData))
     }
     this.form.reset()

@@ -16,4 +16,10 @@
   & .battle-wrapper{
     width: 85%;
   }
+  & .logOut{
+    cursor: pointer;
+    & :hover{
+      color: green;
+    }
+  }
 }

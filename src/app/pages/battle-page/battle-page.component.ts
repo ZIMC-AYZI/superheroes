@@ -10,7 +10,6 @@ import {TableDataModels} from "../../models/table-data-models";
 import {timer} from "rxjs";
 import {PowerUpsService} from "../../core/services/power-ups.service";
 import {AuthService} from "../../core/services/auth.service";
-import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-battle-page',
@@ -32,7 +31,6 @@ export class BattlePageComponent implements OnInit {
     private fightTableDataService: FightTableDataService,
     private powerUpsService: PowerUpsService,
     private authService: AuthService,
-    private toastr: ToastrService,
   ) {
   }
 
@@ -49,7 +47,7 @@ export class BattlePageComponent implements OnInit {
   }
 
   public getRandomEnemy(): void {
-    timer(3000).pipe(mergeMap(() =>
+    timer(1000).pipe(mergeMap(() =>
       this.data.getById(this.getRandom())
     ))
       .pipe(takeUntil(this.ngOnDestroy$))
@@ -59,7 +57,13 @@ export class BattlePageComponent implements OnInit {
   }
 
   public heroPower(hero: object): number {
-    return Object.values(hero).reduce((a, b) => +a + +b);
+    return Object.values(hero).reduce((acc, current) => {
+      if (current !== 'null'){
+        return +acc + +current
+      } else {
+        return 0
+      }
+    });
   }
 
   public createFightData(result: string): TableDataModels {
@@ -74,26 +78,26 @@ export class BattlePageComponent implements OnInit {
   }
 
   public fight(): void {
-    if (this.heroPower(this.hero.powerstats) >= this.heroPower(this.enemy.powerstats)) {
+    if (this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats)) {
       this.powerUpsService.setToLocalStorage()
       this.resultFight = 'Win';
       this.getRandomEnemy();
       this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
       this.enemy = null;
-      this.toastr.success(`${this.resultFight}`,'You',{
-        positionClass: 'toast-top-center',
-      });
     } else {
       this.powerUpsService.setToLocalStorage()
       this.resultFight = 'Loose';
       this.getRandomEnemy();
       this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
       this.enemy = null
-      this.toastr.error(`${this.resultFight}`,'You', {
-        positionClass: 'toast-top-center',
-      });
     }
     this.isSelect = !this.isSelect
+    this.clearResult()
+  }
+  public clearResult() {
+    setTimeout(() => {
+      this.resultFight = '';
+    }, 1000)
   }
 
   public selectPower(item: PowerUp): void {

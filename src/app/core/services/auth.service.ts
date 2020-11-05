@@ -4,31 +4,34 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private isAuth: boolean;
+  private isAuth = sessionStorage.getItem('myToken') ? true : false;
   private myToken: number;
-  private expireDate = 10000;
+  private expireDate = 500000;
   private sessionEnd = true;
 
   public signIn(): void {
     this.myToken = Date.now();
     this.setToken();
     this.isAuth = true;
+    this.sessionEnd = true;
   }
 
   public logout(): void {
     this.clearToken();
     this.isAuth = false;
+    this.sessionEnd = false
   }
 
-  stateSessionForGuard(state) {
+
+  public stateSessionForGuard(state: boolean): void {
     this.sessionEnd = state;
   }
-  getSessionEnd() {
+  public getSessionEnd(): boolean {
     return this.sessionEnd
   }
 
 
-  getAuthState() {
+  public getAuthState(): boolean {
     return this.isAuth
   }
 
@@ -50,7 +53,7 @@ export class AuthService {
         localStorage.removeItem('recent-search');
         localStorage.removeItem('fight-data');
         localStorage.removeItem('power-ups');
-        localStorage.removeItem('all-heroes');
+        localStorage.removeItem('allHeroes');
         localStorage.removeItem('fight-hero');
         localStorage.removeItem('user-hero');
       }

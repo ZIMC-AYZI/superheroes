@@ -53,7 +53,6 @@ export class UserInfoPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sort
   }
 
-
   public trackByFn(index, item): void {
     return item.name;
   }

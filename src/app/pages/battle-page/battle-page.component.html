@@ -4,8 +4,9 @@
   </div>
   <div class="middle-side">
     <div class="content-wrapper">
+      <p class="mat-title result-battle" *ngIf="resultFight">{{'you ' + resultFight | uppercase}}</p>
       <p class="hero-name">{{ hero.name }}</p>
-      <button class="btn btn-danger start-fight" (click)="fight()">start</button>
+      <button class="btn btn-danger start-fight" (click)="fight()">Fight</button>
       <p *ngIf="enemy" class="hero-name">{{ enemy.name }}</p>
     </div>
     <div class="power-stats-wrapper">

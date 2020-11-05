@@ -17,13 +17,18 @@ export class UserHeroService {
     if (localStorage.getItem('user-hero')) {
       this.currentHero = JSON.parse(localStorage.getItem('user-hero'));
       if (localStorage.getItem('allHeroes')) {
-        this.userHeroes = [...JSON.parse(localStorage.getItem('allHeroes')), this.currentHero];
+
+        this.userHeroes = JSON.parse(localStorage.getItem('allHeroes'));
+        this.userHeroes = this.userHeroes.filter(el => el.id !== this.currentHero.id);
+        this.userHeroes = [...this.userHeroes, this.currentHero]
       } else {
         this.userHeroes = [...this.userHeroes, this.currentHero];
       }
       localStorage.setItem('allHeroes', JSON.stringify(this.userHeroes));
     }
   }
+
+
 
   public setDisplayHero(hero: Hero): void {
     this.displayHero = hero;

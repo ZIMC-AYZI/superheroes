@@ -27,7 +27,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
   protected initForm(): void {
     if (localStorage.getItem('users')) {
       const userStorage = JSON.parse(localStorage.getItem('users'));
-      this.userData.push(...userStorage)
+      this.userData = [...this.userData, ...userStorage]
     }
     this.form = this.fb.group({
       email: ['', [
@@ -38,9 +38,11 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
       ]]
     });
     if (!this.authService.getSessionEnd()){
-      this.toastr.error('Сделайте авторизацию если хотите продолжить', 'Ваша сессия окончена', {
+      this.toastr.info('Сделайте авторизацию если хотите продолжить', 'Ваша сессия окончена', {
+        timeOut: 6000,
         positionClass: 'toast-top-center',
       });
+      this.authService.stateSessionForGuard(true)
     }
   }
 
@@ -56,8 +58,12 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
           setTimeout(() => {
             this.router.navigate([myRoutes.heroSelectPage.routerPath]);
           }, 2000)
-          console.log('вы вошли')
-        } else console.log('такого нету')
+        } else {
+          this.toastr.error('Такого юзера нету', `Простите`, {
+            timeOut: 2000,
+            positionClass: 'toast-top-center',
+          });
+        }
       })
     }
     this.form.reset()

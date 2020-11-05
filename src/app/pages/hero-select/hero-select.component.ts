@@ -50,7 +50,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
 
   public findHeroes(): void {
     if (this.form.valid) {
-      this.recentSearches.push(this.form.value.userEnterValue);
+      this.recentSearches = [...this.recentSearches, this.form.value.userEnterValue]
       localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
       this.data.getData(this.form.value.userEnterValue)
         .pipe(takeUntil(this.ngOnDestroy$))
@@ -82,7 +82,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
 
   public searchByValueBtn(menuState: boolean): void {
     this.stateAlphabetical = menuState;
-    this.recentSearches.push(this.myLetter);
+    this.recentSearches = [...this.recentSearches, this.myLetter]
     localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
     this.data.getData(this.myLetter)
       .pipe(takeUntil(this.ngOnDestroy$))
