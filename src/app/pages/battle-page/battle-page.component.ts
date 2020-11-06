@@ -80,40 +80,22 @@ export class BattlePageComponent implements OnInit {
   }
 
   public fight(): void {
-    this.battleSpinner().then(() => {
-      this.getRandomEnemy();
-      this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats) ? this.createFight('Win') : this.createFight('Loose');
-      this.isSelect = !this.isSelect;
-      this.clearResult()
-    });
+        this.battle = true;
+        timer(5000)
+          .pipe(takeUntil(this.ngOnDestroy$))
+          .subscribe(() => {
+            this.battle = false;
+            this.getRandomEnemy();
+            this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats) ? this.createFight('Win') : this.createFight('Loose');
+            this.isSelect = !this.isSelect;
+          })
   }
-
 
   private createFight(result: string): void {
     this.powerUpsService.setToLocalStorage();
     this.resultFight = result;
     this.fightTableDataService.setToLocalStorage(this.createFightData(result));
     this.enemy = null;
-  }
-
-  public battleSpinner(): Promise<boolean> {
-    return new Promise((resolve) => {
-      this.battle = true;
-      timer(5000)
-        .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe((value: number) => {
-          this.battle = false;
-          resolve();
-        })
-    });
-  }
-
-  public clearResult() {
-    timer(6000)
-      .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((value: number) => {
-        this.resultFight = ''
-      })
   }
 
   public selectPower(item: PowerUp): void {
