@@ -24,6 +24,7 @@ export class BattlePageComponent implements OnInit {
   public enemy: Hero;
   public resultFight: string;
   public isSelect = false;
+  private battle = false;
 
   constructor(
     @Self() public ngOnDestroy$: NgOnDestroy,
@@ -59,7 +60,7 @@ export class BattlePageComponent implements OnInit {
 
   public heroPower(hero: object): number {
     return Object.values(hero).reduce((acc, current) => {
-      if (current !== 'null'){
+      if (current !== 'null') {
         return +acc + +current
       } else {
         return 0
@@ -79,20 +80,36 @@ export class BattlePageComponent implements OnInit {
   }
 
   public fight(): void {
-    this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats) ? this.createFight('Win') : this.createFight('Loose');
-    this.isSelect = !this.isSelect;
-    this.clearResult()
+    this.battleSpinner().then(() => {
+      this.getRandomEnemy();
+      this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats) ? this.createFight('Win') : this.createFight('Loose');
+      this.isSelect = !this.isSelect;
+      this.clearResult()
+    });
   }
-  private createFight(result: string) {
+
+
+  private createFight(result: string): void {
     this.powerUpsService.setToLocalStorage();
     this.resultFight = result;
-    this.getRandomEnemy();
     this.fightTableDataService.setToLocalStorage(this.createFightData(result));
     this.enemy = null;
   }
 
+  public battleSpinner(): Promise<boolean> {
+    return new Promise((resolve) => {
+      this.battle = true;
+      timer(5000)
+        .pipe(takeUntil(this.ngOnDestroy$))
+        .subscribe((value: number) => {
+          this.battle = false;
+          resolve();
+        })
+    });
+  }
+
   public clearResult() {
-    timer(1000)
+    timer(6000)
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((value: number) => {
         this.resultFight = ''

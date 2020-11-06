@@ -2,7 +2,7 @@
   <div class="left-side">
     <app-found-hero [foundHero]="hero"></app-found-hero>
   </div>
-  <div class="middle-side">
+  <div class="middle-side" *ngIf="!battle else spinner">
     <div class="content-wrapper">
       <p class="mat-title result-battle" *ngIf="resultFight">{{'you ' + resultFight | uppercase}}</p>
       <p class="hero-name">{{ hero.name }}</p>
