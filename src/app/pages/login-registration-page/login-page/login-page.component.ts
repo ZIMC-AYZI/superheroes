@@ -37,7 +37,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
         Validators.required,
       ]]
     });
-    if (!this.authService.getSessionEnd()){
+    if (!this.authService.getSessionEnd()) {
       this.toastr.info('Сделайте авторизацию если хотите продолжить', 'Ваша сессия окончена', {
         timeOut: 6000,
         positionClass: 'toast-top-center',

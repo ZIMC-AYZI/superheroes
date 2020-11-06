@@ -26,6 +26,7 @@ export class AuthService {
   public stateSessionForGuard(state: boolean): void {
     this.sessionEnd = state;
   }
+
   public getSessionEnd(): boolean {
     return this.sessionEnd
   }
@@ -57,6 +58,6 @@ export class AuthService {
         localStorage.removeItem('fight-hero');
         localStorage.removeItem('user-hero');
       }
-    } else console.log('войдите')
+    }
   }
 }

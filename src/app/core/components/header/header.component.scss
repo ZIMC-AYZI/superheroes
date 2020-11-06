@@ -16,10 +16,11 @@
   & .battle-wrapper{
     width: 85%;
   }
-  & .logOut{
-    cursor: pointer;
-    & :hover{
-      color: green;
+  & .collapse{
+    & .navbar-nav{
+      & .go-battle{
+        cursor: pointer;
+      }
     }
   }
 }
