@@ -8,19 +8,16 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './found-hero.component.html',
   styleUrls: ['./found-hero.component.scss']
 })
-export class FoundHeroComponent implements OnInit {
-  @Input() public foundHero: Hero;
+export class FoundHeroComponent {
   public chooseHeroState = false;
   public allHeroes: Hero[];
+  @Input() public foundHero: Hero;
 
   constructor(
     private userHeroService: UserHeroService,
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {}
-
-  ngOnInit(): void {
-  }
 
   public chooseThisHero(): void {
     this.chooseHeroState = true;

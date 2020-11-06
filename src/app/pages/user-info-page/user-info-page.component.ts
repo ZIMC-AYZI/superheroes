@@ -31,7 +31,7 @@ export class UserInfoPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   constructor(
-    @Self() public ngOnDestroy$: NgOnDestroy,
+    @Self() private ngOnDestroy$: NgOnDestroy,
     private authService: AuthService,
     private fightTableDataService: FightTableDataService,
     private userHeroService: UserHeroService,

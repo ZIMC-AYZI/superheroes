@@ -7,10 +7,10 @@ import {alphaLetters} from "../../../shared/utils/constants/alhfa-betical-letter
   styleUrls: ['./alphabetical.component.scss']
 })
 export class AlphabeticalComponent {
-  @Output() myLetter: EventEmitter<string> = new EventEmitter<string>();
-  @Output() searchBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
   public menuLetters: string[] = alphaLetters;
   public myTargetLetter: string;
+  @Output() myLetter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() searchBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   showMyTarget(letter: string) {
     this.myTargetLetter = letter;

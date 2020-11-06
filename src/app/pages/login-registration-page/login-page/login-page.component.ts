@@ -5,7 +5,7 @@ import {AuthService} from "../../../core/services/auth.service";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
 import {User} from "../../../models/user-models";
 import {myRoutes} from "../../../core/routes/routes";
-import {ToastrService} from "ngx-toastr";
+import {MyToastrService} from "../../../core/services/my-toastr.service";
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +19,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
-    private toastr: ToastrService,
+    private myToastrService:MyToastrService
   ) {
     super();
   }
@@ -38,10 +38,12 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
       ]]
     });
     if (!this.authService.getSessionEnd()) {
-      this.toastr.info('Сделайте авторизацию если хотите продолжить', 'Ваша сессия окончена', {
-        timeOut: 6000,
-        positionClass: 'toast-top-center',
-      });
+      this.myToastrService.createMessage(
+        'Сделайте авторизацию если хотите продолжить',
+        'Ваша сессия окончена',
+        6000,
+        'toast-top-center'
+      );
       this.authService.stateSessionForGuard(true)
     }
   }
@@ -51,18 +53,22 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
       this.userData.forEach(el => {
         if (email === el.email && password === el.password) {
           this.authService.signIn();
-          this.toastr.success('Добро пожаловать, отправляю вас на поле выбора героя', `${el.username}`, {
-            timeOut: 2000,
-            positionClass: 'toast-top-center',
-          });
+          this.myToastrService.createMessage(
+            'Добро пожаловать, отправляю вас на поле выбора героя',
+            `${el.username}`,
+            2000,
+            'toast-top-center'
+          );
           setTimeout(() => {
             this.router.navigate([myRoutes.heroSelectPage.routerPath]);
           }, 2000)
         } else {
-          this.toastr.error('Такого юзера нету', `Простите`, {
-            timeOut: 2000,
-            positionClass: 'toast-top-center',
-          });
+          this.myToastrService.createMessage(
+            'Такого юзера нету',
+            'Простите',
+            2000,
+            'toast-top-center'
+          );
         }
       })
     }

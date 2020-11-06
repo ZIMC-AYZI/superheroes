@@ -3,7 +3,7 @@ import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Route
 import {Observable} from 'rxjs';
 import {AuthService} from "./auth.service";
 import {myRoutes} from "../routes/routes";
-import {ToastrService} from "ngx-toastr";
+import {MyToastrService} from "./my-toastr.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private toastr: ToastrService
+    private myToastrService: MyToastrService
   ) {
   }
 
@@ -24,10 +24,12 @@ export class AuthGuard implements CanActivate {
       return true
     } else {
       this.router.navigate([myRoutes.logIn.routerPath]);
-      this.toastr.error('Сделайте авторизацию', 'Для перехода', {
-        timeOut: 2000,
-        positionClass: 'toast-top-center',
-      });
+      this.myToastrService.createMessage(
+        'Сделайте авторизацию',
+        'Для перехода',
+        2000,
+        'toast-top-center'
+      );
       return false
     }
   }

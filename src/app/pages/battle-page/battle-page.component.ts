@@ -10,6 +10,7 @@ import {TableDataModels} from "../../models/table-data-models";
 import {timer} from "rxjs";
 import {PowerUpsService} from "../../core/services/power-ups.service";
 import {AuthService} from "../../core/services/auth.service";
+import {quantityHeroes} from "../../shared/utils/constants/quantity-for-random.const";
 
 @Component({
   selector: 'app-battle-page',
@@ -42,7 +43,7 @@ export class BattlePageComponent implements OnInit {
   }
 
   public getRandom(): number {
-    let random = Math.floor((Math.random() * 731) + 1);
+    let random = Math.floor((Math.random() * quantityHeroes.max) + quantityHeroes.min);
     return random;
   }
 
@@ -78,26 +79,24 @@ export class BattlePageComponent implements OnInit {
   }
 
   public fight(): void {
-    if (this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats)) {
-      this.powerUpsService.setToLocalStorage()
-      this.resultFight = 'Win';
-      this.getRandomEnemy();
-      this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
-      this.enemy = null;
-    } else {
-      this.powerUpsService.setToLocalStorage()
-      this.resultFight = 'Loose';
-      this.getRandomEnemy();
-      this.fightTableDataService.setToLocalStorage(this.createFightData(this.resultFight))
-      this.enemy = null
-    }
-    this.isSelect = !this.isSelect
+    this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats) ? this.createFight('Win') : this.createFight('Loose');
+    this.isSelect = !this.isSelect;
     this.clearResult()
   }
+  private createFight(result: string) {
+    this.powerUpsService.setToLocalStorage();
+    this.resultFight = result;
+    this.getRandomEnemy();
+    this.fightTableDataService.setToLocalStorage(this.createFightData(result));
+    this.enemy = null;
+  }
+
   public clearResult() {
-    setTimeout(() => {
-      this.resultFight = '';
-    }, 1000)
+    timer(1000)
+      .pipe(takeUntil(this.ngOnDestroy$))
+      .subscribe((value: number) => {
+        this.resultFight = ''
+      })
   }
 
   public selectPower(item: PowerUp): void {

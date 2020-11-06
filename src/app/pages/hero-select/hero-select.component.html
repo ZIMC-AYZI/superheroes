@@ -1,24 +1,19 @@
 <div class="hero-select-wrapper">
   <div class="container">
     <div class="md-form mt-0 search-custom-wrapper">
-<!--Custom menu-->
-      <button
-        class="btn btn-danger custom"
+      <button class="btn btn-danger custom"
         (click)="showAlphabetical()"
       >{{ myLetter | uppercase}}</button>
-      <app-alphabetical
-        *ngIf="stateAlphabetical"
+      <app-alphabetical *ngIf="stateAlphabetical"
         (myLetter)="toggleLetter($event)"
         (searchBtn)="searchByValueBtn($event)"
       ></app-alphabetical>
-<!--Custom menu-->
       <form [formGroup]="form">
         <div class="form-group">
       <input class="form-control"
              type="text"
              formControlName="userEnterValue">
-        <div
-          *ngIf="getField('userEnterValue').invalid && getField('userEnterValue').touched"
+        <div *ngIf="getField('userEnterValue').invalid && getField('userEnterValue').touched"
           class="validation"
         >
           <small *ngIf="isFieldHasError('userEnterValue', 'required')">

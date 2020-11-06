@@ -8,10 +8,8 @@
           <label>Email address</label>
           <input type="text" formControlName="email">
         </div>
-        <div
-          *ngIf="getField('email').invalid && getField('email').touched"
-          class="validation"
-        >
+        <div *ngIf="getField('email').invalid && getField('email').touched"
+          class="validation">
           <small *ngIf="isFieldHasError('email', 'required')">
             поле не может быть пустым
           </small>
@@ -24,10 +22,8 @@
           <label>Пароль</label>
           <input type="password" formControlName="password">
         </div>
-        <div
-          *ngIf="getField('password').invalid && getField('password').touched"
-          class="validation"
-        >
+        <div *ngIf="getField('password').invalid && getField('password').touched"
+          class="validation">
           <small *ngIf="isFieldHasError('password', 'required')">
             Пароль не может быть пустым
           </small>
@@ -35,15 +31,12 @@
             Используйте 1 спец символ ($%.&!-), число и буквы(a,A)
           </small>
         </div>
-
         <div class="form-group">
           <label>Username</label>
           <input type="text" formControlName="username">
         </div>
-        <div
-          *ngIf="getField('username').invalid && getField('username').touched"
-          class="validation"
-        >
+        <div *ngIf="getField('username').invalid && getField('username').touched"
+          class="validation">
           <small *ngIf="isFieldHasError('username', 'required')">
             поле не может быть пустым
           </small>

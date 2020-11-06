@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {myRoutes} from "../../routes/routes";
 import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
+import {MyToastrService} from "../../services/my-toastr.service";
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ import {ToastrService} from "ngx-toastr";
 export class HeaderComponent{
   constructor(
     private router: Router,
-    private toastr: ToastrService
+    private myToastrService: MyToastrService
   ) {
   }
 
@@ -20,10 +20,12 @@ export class HeaderComponent{
     if (localStorage.getItem('fight-hero')){
       this.router.navigate([myRoutes.battlePage.routerPath])
     } else {
-      this.toastr.info('Если хотите попасть в битву', `Выберите героя для боя`, {
-        timeOut: 2000,
-        positionClass: 'toast-top-center',
-      });
+      this.myToastrService.createMessage(
+        'Если хотите попасть в битву',
+        'Выберите героя для боя',
+        2000,
+        'toast-top-center'
+      );
     }
   }
 }

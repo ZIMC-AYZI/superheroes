@@ -8,7 +8,6 @@ import {SEARCH_HEROES_VALIDATORS_CONST} from "./utils/search-heroes-validators.c
 import {NgOnDestroy} from "../../core/services/ng-on-destroy.service";
 import {takeUntil} from "rxjs/operators";
 import {UserHeroService} from "../../core/services/user-hero.service";
-import {User} from "../../models/user-models";
 import {ServerResponse} from "../../models/server-response-models";
 
 @Component({
@@ -52,24 +51,12 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     if (this.form.valid) {
       this.recentSearches = [...this.recentSearches, this.form.value.userEnterValue]
       localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
-      this.data.getData(this.form.value.userEnterValue)
-        .pipe(takeUntil(this.ngOnDestroy$))
-        .subscribe((response: ServerResponse) => {
-          this.foundHeroes = response.results;
-          this.resultState = true;
-          this.result = response.results.length;
-        })
+      this.getRequest(this.form.value.userEnterValue)
     }
   }
 
   public recentSearch(recent: string): void {
-    this.data.getData(recent)
-      .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((response: ServerResponse) => {
-        this.foundHeroes = response.results;
-        this.resultState = true;
-        this.result = response.results.length;
-      })
+    this.getRequest(recent)
   }
 
   public showAlphabetical(): void {
@@ -84,12 +71,16 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     this.stateAlphabetical = menuState;
     this.recentSearches = [...this.recentSearches, this.myLetter]
     localStorage.setItem('recent-search', JSON.stringify(this.recentSearches));
-    this.data.getData(this.myLetter)
+    this.getRequest(this.myLetter)
+  }
+
+  private getRequest(value) {
+    this.data.getData(value)
       .pipe(takeUntil(this.ngOnDestroy$))
-      .subscribe((response: ServerResponse) => {
-        this.foundHeroes = response.results;
+      .subscribe(({results}: ServerResponse) => {
+        this.foundHeroes = results;
         this.resultState = true;
-        this.result = response.results.length;
+        this.result = results.length;
       })
   }
 
