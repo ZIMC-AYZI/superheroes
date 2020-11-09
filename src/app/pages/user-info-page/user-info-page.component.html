@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="tabs-wrapper" >
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Heroes list">
+        <ng-container *ngTemplateOutlet="heroesList"></ng-container>
+      </mat-tab>
+      <mat-tab label="History">
+        <ng-container *ngTemplateOutlet="history"></ng-container>
+      </mat-tab>
+      <mat-tab label="Power Ups">
+        <ng-container *ngTemplateOutlet="powerUps"></ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
+
+<ng-template #heroesList>
+  <div class="carousel-wrapper">
+    <ngb-carousel *ngIf="selectedHeroes else nullHero">
+      <ng-template ngbSlide *ngFor="let hero of selectedHeroes; trackBy: trackByFn">
+        <app-found-hero [foundHero]="hero">
+        </app-found-hero>
+      </ng-template>
+    </ngb-carousel>
+    <ng-template #nullHero>
+      <div class="null-hero-wrapper">
+        <p>Pick a hero</p>
+        <div class="image-wrapper">
+         <div class="img"></div>
+        </div>
+      </div>
+    </ng-template>
+    <div class="button-wrapper">
+      <button class="btn btn-block btn-danger add-new" routerLink="/hero-select">
+        <mat-icon>games</mat-icon>
+        <p class="add-new-text">add hero</p>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #history>
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+      <ng-container matColumnDef="battleTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Battle date and time </th>
+        <td mat-cell *matCellDef="let element"> {{element.battleTime}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="heroName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hero name </th>
+        <td class="hero-link" mat-cell *matCellDef="let element" (click)="showInfoMyHero(element)"> {{element.heroName}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="OpponentName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opponent name </th>
+        <td class="hero-link" mat-cell *matCellDef="let element" (click)="showInfoOpponent(element)"> {{element.opponentName}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="result">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Battle result </th>
+        <td mat-cell *matCellDef="let element"> {{element.result}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</ng-template>
+
+<ng-template #powerUps>
+  <div class="power-stats-wrapper">
+    <div class="power-stats-item" *ngFor="let item of userPowerUps; trackBy: trackByFn">
+      <div class="power-img">
+        <img src="{{ item.imgUrl }}" >
+      </div>
+      <div class="power-stats">
+        <p>{{ item.title }}</p>
+      </div>
+      <div class="power-left">
+        <p>left : {{ item.quantity }}</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

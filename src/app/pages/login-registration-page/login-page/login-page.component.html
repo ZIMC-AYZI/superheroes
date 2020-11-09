@@ -1,0 +1,33 @@
+<div class="wrapper-form">
+  <div class="card">
+    <h5 class="card-title">Sign In</h5>
+    <div class="card-body">
+      <form class="card border-0" [formGroup]="form" (ngSubmit)="login(form.value)">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="text" formControlName="email">
+        </div>
+        <div *ngIf="getField('email').invalid && getField('email').touched"
+          class="validation">
+          <small *ngIf="isFieldHasError('email', 'required')">
+            поле не может быть пустым
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Пароль</label>
+          <input type="password" formControlName="password">
+        </div>
+        <div *ngIf="getField('password').invalid && getField('password').touched"
+          class="validation">
+          <small *ngIf="isFieldHasError('password', 'required')">
+            Пароль не может быть пустым
+          </small>
+        </div>
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Sign in</button>
+        <div class="bottom-wrapper">
+          <button type="button" class="register" (click)="goToRegister()">Create new account?</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

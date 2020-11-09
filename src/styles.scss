@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  list-style: none;
+  text-decoration: none;
+}
+.wrapper-form{
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  & .form-group{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    width: 400px;
+    margin-bottom: 0;
+    & input{
+      &.ng-invalid.ng-touched {
+        border: 1px solid red;
+      }
+      &.ng-valid.ng-touched {
+        border: 1px solid green;
+      }
+    }
+    & label{
+      display: flex;
+      justify-content: flex-start;
+      width: 120px;
+    }
+  }
+  & .btn{
+    margin: 10px;
+  }
+  & .validation{
+    & small{
+      height: 30px;
+      background: #fd9b9b;
+      padding: 10px;
+      border-radius: 5px;
+      align-items: center;
+      display: flex;
+      margin: 5px;
+    }
+  }
+  & .card{
+
+    background: #f7f7f7;
+    & .card-title{
+      padding: 10px;
+    }
+    & .form.card{
+      background: #f7f7f7;
+    }
+  }
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

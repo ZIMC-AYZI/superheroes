@@ -1,0 +1,57 @@
+<div class="wrapper-form">
+  <div class="card">
+    <h5 class="card-title">Registration</h5>
+    <div class="card-body">
+      <form class="card border-0" [formGroup]="form" (ngSubmit)="registerUser(form.value)">
+
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="text" formControlName="email">
+        </div>
+        <div *ngIf="getField('email').invalid && getField('email').touched"
+          class="validation">
+          <small *ngIf="isFieldHasError('email', 'required')">
+            поле не может быть пустым
+          </small>
+          <small *ngIf="isFieldHasError('email', 'pattern')">
+            Введите корректный Email
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label>Пароль</label>
+          <input type="password" formControlName="password">
+        </div>
+        <div *ngIf="getField('password').invalid && getField('password').touched"
+          class="validation">
+          <small *ngIf="isFieldHasError('password', 'required')">
+            Пароль не может быть пустым
+          </small>
+          <small *ngIf="isFieldHasError('password', 'pattern')">
+            Используйте 1 спец символ ($%.&!-), число и буквы(a,A)
+          </small>
+        </div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" formControlName="username">
+        </div>
+        <div *ngIf="getField('username').invalid && getField('username').touched"
+          class="validation">
+          <small *ngIf="isFieldHasError('username', 'required')">
+            поле не может быть пустым
+          </small>
+
+          <small *ngIf="isFieldHasError('username', 'pattern')">
+            Введите корректное имя пользователя
+          </small>
+
+          <small *ngIf="isFieldHasError('username', 'minlength')">
+            Имя пользователя слишком короткое
+          </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create new account</button>
+      </form>
+    </div>
+  </div>
+</div>

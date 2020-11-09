@@ -1,0 +1,201 @@
+.hero-card{
+  position: relative;
+  width: 500px;
+  height: 700px;
+  background-image: url("../../../shared/img/herocard.png");
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 50px;
+  & img{
+    z-index: -1;
+    width: 450px;
+    height: 650px;
+    position: absolute;
+    top: 3%;
+    left: 4%;
+  }
+  & .btn-wrapper{
+    display: flex;
+    justify-content: center;
+    padding: 37px 0 0 100px;
+    & .btn {
+      border-radius: 12px;
+      outline: none;
+      & :disabled{
+        background: #cacaca;
+      }
+    }
+    & p{
+      padding: 4px 5px 0 5px;
+      margin: 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+  & .energy{
+    position: absolute;
+    top: 19%;
+    left: 7.2%;
+    border-radius: 32%;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #aab5bb;
+    &::after{
+      content: "";
+      z-index: 10;
+      position: absolute;
+      background: url("../../../shared/img/energy.png") no-repeat center;
+      width: 30px;
+      background-size: cover;
+      height: 30px;
+      top: 0px;
+      left: 3px;
+    }
+    & .power-stat{
+      position: absolute;
+      font-size: 11px;
+      font-weight: bold;
+      bottom: -5px;
+      left: 12px;
+    }
+  }
+  & .speed{
+    position: absolute;
+    top: 30%;
+    left: 7.2%;
+    border-radius: 32%;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #aab5bb;
+    &::after{
+      content: "";
+      z-index: 10;
+      position: absolute;
+      background: url("../../../shared/img/speed.png") no-repeat center;
+      width: 30px;
+      background-size: cover;
+      height: 30px;
+      top: 0px;
+      left: 3px;
+    }
+    & .power-stat{
+      position: absolute;
+      font-size: 11px;
+      font-weight: bold;
+      bottom: -5px;
+      left: 12px;
+    }
+  }
+  & .power{
+    position: absolute;
+    top: 41%;
+    left: 7.2%;
+    border-radius: 32%;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #aab5bb;
+    &::after{
+      content: "";
+      z-index: 10;
+      position: absolute;
+      background: url("../../../shared/img/strength.png") no-repeat center;
+      width: 30px;
+      background-size: cover;
+      height: 30px;
+      top: 0px;
+      left: 3px;
+    }
+    & .power-stat{
+      position: absolute;
+      font-size: 11px;
+      font-weight: bold;
+      bottom: -5px;
+      left: 12px;
+    }
+  }
+  & .combat{
+    position: absolute;
+    top: 52%;
+    left: 7.2%;
+    border-radius: 32%;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #aab5bb;
+    &::after{
+      content: "";
+      z-index: 10;
+      position: absolute;
+      background: url("../../../shared/img/knife.png") no-repeat center;
+      width: 30px;
+      background-size: cover;
+      height: 30px;
+      top: 0px;
+      left: 3px;
+    }
+    & .power-stat{
+      position: absolute;
+      font-size: 11px;
+      font-weight: bold;
+      bottom: -5px;
+      left: 12px;
+    }
+  }
+  & .durability{
+    position: absolute;
+    top: 63%;
+    left: 7.2%;
+    border-radius: 32%;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #aab5bb;
+    &::after{
+      content: "";
+      z-index: 10;
+      position: absolute;
+      background: url("../../../shared/img/life.png") no-repeat center;
+      width: 30px;
+      background-size: cover;
+      height: 30px;
+      top: 0px;
+      left: 3px;
+    }
+    & .power-stat{
+      position: absolute;
+      font-size: 11px;
+      font-weight: bold;
+      bottom: -5px;
+      left: 12px;
+    }
+  }
+  & .Intelligence{
+    position: absolute;
+    top: 74%;
+    left: 7.2%;
+    border-radius: 32%;
+    width: 40px;
+    height: 70px;
+    border: 2px solid #aab5bb;
+    &::after{
+      content: "";
+      z-index: 10;
+      position: absolute;
+      background: url("../../../shared/img/brain.png") no-repeat center;
+      width: 30px;
+      background-size: cover;
+      height: 30px;
+      top: 0px;
+      left: 3px;
+    }
+    & .power-stat{
+      position: absolute;
+      font-size: 11px;
+      font-weight: bold;
+      bottom: -5px;
+      left: 12px;
+    }
+  }
+  & .title-wrapper{
+    display: flex;
+    justify-content: center;
+  }
+}
