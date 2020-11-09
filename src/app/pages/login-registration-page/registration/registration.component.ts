@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {AbstractFormComponent} from "../../../shared/classes/abstract-form-component";
 import {User} from "../../../models/user-models";
 import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registration-form-validators.const";
+import {Router} from "@angular/router";
+import {myRoutes} from "../../../core/routes/routes";
 
 @Component({
   selector: 'app-registration',
@@ -10,10 +12,11 @@ import {START_REGISTRATION_FORM_VALIDATORS_CONST} from "../utils/start-registrat
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent extends AbstractFormComponent implements OnInit {
-  private userData: User[] = [];
+  private userData: User[] = localStorage.getItem('users')? JSON.parse(localStorage.getItem('users')): [];
 
   constructor(
     private fb: FormBuilder,
+    private router: Router
   ) {
     super();
   }
@@ -46,6 +49,7 @@ export class RegistrationComponent extends AbstractFormComponent implements OnIn
       };
       this.userData = [...this.userData, user];
       localStorage.setItem('users', JSON.stringify(this.userData))
+      this.router.navigate([myRoutes.logIn.routerPath])
     }
     this.form.reset()
   }

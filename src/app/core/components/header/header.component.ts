@@ -22,9 +22,7 @@ export class HeaderComponent{
     } else {
       this.myToastrService.createMessage(
         'Если хотите попасть в битву',
-        'Выберите героя для боя',
-        2000,
-        'toast-top-center'
+        'Выберите героя для боя'
       );
     }
   }

@@ -13,7 +13,7 @@ import {MyToastrService} from "../../../core/services/my-toastr.service";
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent extends AbstractFormComponent implements OnInit {
-  private userData: User[] = [];
+  private userData: User[] = localStorage.getItem('users')? JSON.parse(localStorage.getItem('users')): [];
 
   constructor(
     private router: Router,
@@ -25,10 +25,6 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
   }
 
   protected initForm(): void {
-    if (localStorage.getItem('users')) {
-      const userStorage = JSON.parse(localStorage.getItem('users'));
-      this.userData = [...this.userData, ...userStorage]
-    }
     this.form = this.fb.group({
       email: ['', [
         Validators.required,
@@ -40,9 +36,7 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
     if (!this.authService.getSessionEnd()) {
       this.myToastrService.createMessage(
         'Сделайте авторизацию если хотите продолжить',
-        'Ваша сессия окончена',
-        6000,
-        'toast-top-center'
+        'Ваша сессия окончена'
       );
       this.authService.stateSessionForGuard(true)
     }
@@ -55,19 +49,15 @@ export class LoginPageComponent extends AbstractFormComponent implements OnInit 
           this.authService.signIn();
           this.myToastrService.createMessage(
             'Добро пожаловать, отправляю вас на поле выбора героя',
-            `${el.username}`,
-            2000,
-            'toast-top-center'
+            `${el.username}`
           );
           setTimeout(() => {
             this.router.navigate([myRoutes.heroSelectPage.routerPath]);
           }, 2000)
-        } else {
+        } else if (email === el.email && password !== el.password) {
           this.myToastrService.createMessage(
-            'Такого юзера нету',
-            'Простите',
-            2000,
-            'toast-top-center'
+            'Введите правильный пароль',
+            'Ошибка входа'
           );
         }
       })

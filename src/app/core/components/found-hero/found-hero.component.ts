@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from "../../../models/hero-card-model";
 import {UserHeroService} from "../../services/user-hero.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {myRoutes} from "../../routes/routes";
 
 @Component({
   selector: 'app-found-hero',
@@ -31,7 +32,7 @@ export class FoundHeroComponent {
 
   public viewHeroInfo(): void {
     this.userHeroService.setDisplayHero(this.foundHero)
-    this.router.navigate(['hero-info'])
+    this.router.navigate([myRoutes.heroInfoPage.routerPath])
   }
 
   public select(): void {

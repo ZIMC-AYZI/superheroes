@@ -58,6 +58,8 @@ export class AuthService {
         localStorage.removeItem('fight-hero');
         localStorage.removeItem('user-hero');
       }
+    } else {
+      this.logout();
     }
   }
 }

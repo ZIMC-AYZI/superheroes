@@ -10,10 +10,10 @@ export class MyToastrService {
     private toastr: ToastrService
   ) {
   }
-  public createMessage(message: string, title: string, timeOut: number, position): object {
+  public createMessage(message: string, title: string): object {
     return this.toastr.info(message, title, {
-      timeOut: timeOut,
-      positionClass: position,
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
     });
   }
 }

@@ -35,11 +35,6 @@ const routes: Routes = [
       m.BattlePageModule),
     canActivate: [AuthGuard]
   },
-  {
-    path: '',
-    redirectTo: myRoutes.logIn.fullPath,
-    pathMatch: 'full'
-  },
   {path: '**', redirectTo: myRoutes.logIn.fullPath, pathMatch: 'full'}
 ];
 

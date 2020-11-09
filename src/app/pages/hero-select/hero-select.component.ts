@@ -74,7 +74,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     this.getRequest(this.myLetter)
   }
 
-  private getRequest(value) {
+  private getRequest(value:string) {
     this.data.getData(value)
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe(({results}: ServerResponse) => {
