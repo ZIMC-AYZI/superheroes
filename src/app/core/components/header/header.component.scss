@@ -1,0 +1,26 @@
+.header{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #cecece;
+  & a.logo{
+    color: red;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  & span.logo{
+    color: blue;
+    text-transform: uppercase;
+    font-size: 20px;
+  }
+  & .battle-wrapper{
+    width: 85%;
+  }
+  & .collapse{
+    & .navbar-nav{
+      & .go-battle{
+        cursor: pointer;
+      }
+    }
+  }
+}

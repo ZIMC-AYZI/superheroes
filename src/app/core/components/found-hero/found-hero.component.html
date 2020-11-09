@@ -1,0 +1,26 @@
+<div class="hero-card">
+  <div class="energy">
+    <p class="power-stat">{{ foundHero.powerstats.strength }}</p>
+  </div>
+  <div class="speed">
+    <p class="power-stat">{{ foundHero.powerstats.speed }}</p>
+  </div>
+  <div class="power">
+    <p class="power-stat">{{ foundHero.powerstats.power }}</p>
+  </div>
+  <div class="combat">
+    <p class="power-stat">{{ foundHero.powerstats.combat }}</p>
+  </div>
+  <div class="durability">
+    <p class="power-stat">{{ foundHero.powerstats.durability }}</p>
+  </div>
+  <div class="Intelligence">
+    <p class="power-stat">{{ foundHero.powerstats.intelligence }}</p>
+  </div>
+  <img [src]="foundHero.image.url" alt="">
+  <div class="btn-wrapper">
+    <button class="btn btn-warning" *ngIf="hideSelectBtn()" [disabled]="chooseHeroState" (click)="select()">Select</button>
+    <p>{{ foundHero.name | titlecase}}</p>
+    <button class="btn btn-info" (click)="viewHeroInfo()">view info</button>
+  </div>
+</div>
