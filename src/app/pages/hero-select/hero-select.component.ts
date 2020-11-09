@@ -9,6 +9,7 @@ import {NgOnDestroy} from "../../core/services/ng-on-destroy.service";
 import {takeUntil} from "rxjs/operators";
 import {UserHeroService} from "../../core/services/user-hero.service";
 import {ServerResponse} from "../../models/server-response-models";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-hero-select',
@@ -29,12 +30,14 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     private data: DataServicesService,
     private authService: AuthService,
     private fb: FormBuilder,
-    private userHeroService: UserHeroService
+    private userHeroService: UserHeroService,
+    private activeRoute: ActivatedRoute
   ) {
     super()
   }
 
   protected initForm(): void {
+    console.log(this.activeRoute)
     if (localStorage.getItem('recent-search')) {
       this.recentSearches = [...JSON.parse(localStorage.getItem('recent-search'))];
     }
