@@ -44,13 +44,15 @@ export class UserInfoPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.powerUpsService.setToLocalStorage();
     this.userPowerUps = this.powerUpsService.getPowerUps();
-    this.dataSource = new MatTableDataSource(this.fightTableDataService.getDataFromLocalStorage())
+    this.dataSource = new MatTableDataSource(this.fightTableDataService.getDataFromLocalStorage());
     this.selectedHeroes = JSON.parse(localStorage.getItem('allHeroes'));
     this.authService.checkSession();
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort
+    if (localStorage.getItem('fight-data')){
+      this.dataSource.sort = this.sort
+    }
   }
 
   public trackByFn(index, item): void {
