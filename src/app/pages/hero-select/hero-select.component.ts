@@ -22,7 +22,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
   public foundHeroes: Hero[] = [];
   public recentSearches: string[] = [];
   public stateAlphabetical = false;
-  public myLetter: string = 'A';
+  public myLetter = 'A';
 
   constructor(
     @Self() public ngOnDestroy$: NgOnDestroy,
@@ -31,7 +31,7 @@ export class HeroSelectComponent extends AbstractFormComponent implements OnInit
     private fb: FormBuilder,
     private userHeroService: UserHeroService,
   ) {
-    super()
+    super();
   }
 
   protected initForm(): void {

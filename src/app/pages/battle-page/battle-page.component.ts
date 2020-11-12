@@ -1,4 +1,4 @@
-import {Component, OnInit, Self} from '@angular/core';
+import {Component, OnDestroy, OnInit, Self} from '@angular/core';
 import {UserHeroService} from "../../core/services/user-hero.service";
 import {Hero} from "../../models/hero-card-model";
 import {PowerUp} from "../../models/power-ups-models";
@@ -18,7 +18,7 @@ import {quantityHeroes} from "../../shared/utils/constants/quantity-for-random.c
   styleUrls: ['./battle-page.component.scss'],
   providers: [NgOnDestroy]
 })
-export class BattlePageComponent implements OnInit {
+export class BattlePageComponent implements OnInit, OnDestroy {
   public hero: Hero;
   public userPowerUps: PowerUp[];
   public enemy: Hero;
@@ -37,6 +37,7 @@ export class BattlePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userHeroService.setStateSelectBtn(false)
     this.userPowerUps = this.powerUpsService.getPowerUps();
     this.hero = this.userHeroService.getHeroForFight();
     this.getRandomEnemy()
@@ -88,7 +89,7 @@ export class BattlePageComponent implements OnInit {
             this.getRandomEnemy();
             this.heroPower(this.hero.powerstats) > this.heroPower(this.enemy.powerstats) ? this.createFight('Win') : this.createFight('Loose');
             this.isSelect = !this.isSelect;
-          })
+          });
   }
 
   private createFight(result: string): void {
@@ -103,7 +104,10 @@ export class BattlePageComponent implements OnInit {
       this.hero.powerstats[item.param.toLowerCase()] = +this.hero.powerstats[item.param.toLowerCase()] + item.stats;
       --item.quantity;
       this.isSelect = !this.isSelect;
-      this.powerUpsService.updatePowerUps(item)
+      this.powerUpsService.updatePowerUps(item);
     }
+  }
+  ngOnDestroy(): void {
+    this.userHeroService.setStateSelectBtn(true);
   }
 }

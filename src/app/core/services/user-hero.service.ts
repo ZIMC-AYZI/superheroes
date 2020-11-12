@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Hero} from "../../models/hero-card-model";
+import {Hero} from '../../models/hero-card-model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +8,8 @@ export class UserHeroService {
   private userHeroes: Hero[] = [];
   private currentHero: Hero;
   private displayHero: Hero;
+  private stateSelectBtn = true;
+
 
   public chooseHero(hero): void {
     localStorage.setItem('user-hero', JSON.stringify(hero));
@@ -29,13 +31,12 @@ export class UserHeroService {
   }
 
 
-
   public setDisplayHero(hero: Hero): void {
     this.displayHero = hero;
   }
 
   public getDisplayHero(): Hero {
-    return this.displayHero
+    return this.displayHero;
   }
 
   public setHeroForFight(hero: Hero): void {
@@ -44,5 +45,13 @@ export class UserHeroService {
 
   public getHeroForFight(): Hero {
     return JSON.parse(localStorage.getItem('fight-hero'));
+  }
+
+  setStateSelectBtn(state: boolean): void {
+    this.stateSelectBtn = state;
+  }
+
+  getStateSelectBtn(): boolean {
+    return this.stateSelectBtn;
   }
 }

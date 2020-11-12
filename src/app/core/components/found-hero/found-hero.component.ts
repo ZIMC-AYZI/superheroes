@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Hero} from "../../../models/hero-card-model";
 import {UserHeroService} from "../../services/user-hero.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {myRoutes} from "../../routes/routes";
 
 @Component({
@@ -9,25 +9,29 @@ import {myRoutes} from "../../routes/routes";
   templateUrl: './found-hero.component.html',
   styleUrls: ['./found-hero.component.scss']
 })
-export class FoundHeroComponent {
+export class FoundHeroComponent implements OnInit{
   public chooseHeroState = false;
   public allHeroes: Hero[];
+  public stateSelectBtn: boolean;
   @Input() public foundHero: Hero;
 
   constructor(
     private userHeroService: UserHeroService,
     private router: Router,
-    private activeRoute: ActivatedRoute
-  ) {}
+  ) {
+  }
+  ngOnInit(): void {
+    this.stateSelectBtn = this.userHeroService.getStateSelectBtn();
+  }
 
   public chooseThisHero(): void {
     this.chooseHeroState = true;
-    this.userHeroService.chooseHero(this.foundHero)
+    this.userHeroService.chooseHero(this.foundHero);
   }
 
   public chooseForFight(): void {
     this.chooseHeroState = true;
-    this.userHeroService.setHeroForFight(this.foundHero)
+    this.userHeroService.setHeroForFight(this.foundHero);
   }
 
   public viewHeroInfo(): void {
@@ -36,17 +40,17 @@ export class FoundHeroComponent {
   }
 
   public select(): void {
-    if (typeof this.activeRoute.component !== "string" && this.activeRoute.component.name === 'HeroSelectComponent'){
-      this.chooseThisHero()
-    }else if (typeof this.activeRoute.component !== "string" && this.activeRoute.component.name === 'UserInfoPageComponent') {
-      this.chooseForFight()
-    }
-  }
-  public hideSelectBtn(): boolean {
-    if (typeof this.activeRoute.component !== "string" && this.activeRoute.component.name !== 'BattlePageComponent'){
-      return true
+    if (localStorage.getItem('allHeroes')){
+      const test = JSON.parse(localStorage.getItem('allHeroes'));
+      test.find(el => {
+        if (el.id === this.foundHero.id) {
+          this.chooseForFight();
+        } else {
+          this.chooseThisHero();
+        }
+      });
     } else {
-      return false
+      this.chooseThisHero();
     }
   }
 }
